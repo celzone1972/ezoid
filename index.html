@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EZOID - Kursus Bahasa Inggris Modern</title>
+  <title>EZOID</title>
 
   <style>
     body {
@@ -28,6 +28,7 @@
       padding: 6px 10px;
       border-radius: 8px;
       font-size: 12px;
+      line-height: 1.4;
     }
 
     .hero {
@@ -64,6 +65,11 @@
       text-decoration: none;
     }
   </style>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
 </head>
 
 <body>
@@ -72,7 +78,8 @@
   <h2>EZOID</h2>
 
   <div class="visitor">
-    Pengunjung: <span id="visitor-count">0</span>
+    Pengunjung: <span id="visitor-count">0</span><br>
+    <small>WA: <span id="wa-count">0</span></small>
   </div>
 </header>
 
@@ -86,14 +93,14 @@
 <div class="card">Business English</div>
 <div class="card">Private Class</div>
 
-<a class="wa" href="https://wa.me/6287770055999">WhatsApp</a>
-
-<!-- 🔥 FIREBASE VISITOR REAL -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<a class="wa" href="https://wa.me/6287770055999" onclick="trackWA()">
+  WhatsApp
+</a>
 
 <script>
-  // CONFIG FIREBASE KAMU
+  // =========================
+  // FIREBASE CONFIG
+  // =========================
   const firebaseConfig = {
     apiKey: "AIzaSyAtWHWo_KZptjHYxV2NDhQHb4zBpbXYyyA",
     authDomain: "ezoid-8328d.firebaseapp.com",
@@ -107,17 +114,33 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
+  // =========================
+  // VISITOR COUNTER
+  // =========================
   const visitorRef = db.ref("visitors");
 
-  // tambah 1 setiap orang buka website
   visitorRef.transaction((current) => {
     return (current || 0) + 1;
   });
 
-  // realtime update
   visitorRef.on("value", (snapshot) => {
-    document.getElementById("visitor-count").innerText = snapshot.val();
+    document.getElementById("visitor-count").innerText = snapshot.val() || 0;
   });
+
+  // =========================
+  // WHATSAPP CLICK COUNTER
+  // =========================
+  const waRef = db.ref("whatsapp_clicks");
+
+  waRef.on("value", (snapshot) => {
+    document.getElementById("wa-count").innerText = snapshot.val() || 0;
+  });
+
+  function trackWA() {
+    waRef.transaction((current) => {
+      return (current || 0) + 1;
+    });
+  }
 </script>
 
 </body>
