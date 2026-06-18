@@ -1,9 +1,107 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EZOID</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      background: #f4f8ff;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e88e5, #42a5f5);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+    }
+
+    .visitor {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background: rgba(255,255,255,0.2);
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .btn {
+      background: #25D366;
+      color: white;
+      padding: 12px 18px;
+      text-decoration: none;
+      border-radius: 8px;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .card {
+      background: white;
+      margin: 10px;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .wa {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: white;
+      padding: 12px;
+      border-radius: 50px;
+      text-decoration: none;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Website EZOID sudah live 🚀</h1>
+
+<header>
+  <h2>EZOID</h2>
+
+  <!-- PENGUNJUNG SEMENTARA (LOCAL) -->
+  <div class="visitor">
+    Pengunjung: <span id="visitor-count">0</span>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>Belajar Bahasa Inggris Modern</h1>
+  <p>Fokus Speaking & Karir</p>
+  <a class="btn" href="https://wa.me/6287770055999">Daftar WhatsApp</a>
+</div>
+
+<div class="card">Speaking Confidence</div>
+<div class="card">Business English</div>
+<div class="card">Private Class</div>
+
+<a class="wa" href="https://wa.me/6287770055999">WhatsApp</a>
+
+<script>
+  // SEMENTARA (LOCAL ONLY)
+  let count = localStorage.getItem("ezoid_visitors");
+
+  if (!count) {
+    count = 1;
+  } else {
+    count = parseInt(count) + 1;
+  }
+
+  localStorage.setItem("ezoid_visitors", count);
+  document.getElementById("visitor-count").innerText = count;
+</script>
+
 </body>
 </html>
