@@ -38,6 +38,24 @@
       line-height: 1.4;
     }
 
+    /* 🔵 LIVE DOT */
+    .live-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: #00c853;
+      border-radius: 50%;
+      margin-right: 6px;
+      animation: pulse 1.8s infinite ease-in-out;
+      vertical-align: middle;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.6); opacity: 0.4; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
     .hero {
       text-align: center;
       padding: 50px 20px;
@@ -55,10 +73,57 @@
 
     .card {
       background: white;
-      margin: 10px;
+      margin: 10px auto;
       padding: 15px;
-      border-radius: 10px;
+      border-radius: 12px;
+      max-width: 600px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       text-align: center;
+    }
+
+    .section {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .section h2 {
+      margin-bottom: 15px;
+      color: #1e88e5;
+      font-size: 20px;
+    }
+
+    /* 💰 PAKET HARGA */
+    .paket-wrapper {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .paket-box {
+      background: white;
+      padding: 20px;
+      width: 150px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      text-align: center;
+      transition: 0.2s;
+    }
+
+    .paket-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .paket-box h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .paket-box b {
+      display: block;
+      margin-top: 10px;
+      font-size: 16px;
     }
 
     .wa {
@@ -75,7 +140,6 @@
 
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
 </head>
 
 <body>
@@ -84,7 +148,7 @@
   <h2>EZOID</h2>
 
   <div class="visitor">
-    Visitor Today: <span id="visitor-count">0</span><br>
+    <span class="live-dot"></span>Visitor Today: <span id="visitor-count">0</span><br>
     WA Today: <span id="wa-count">0</span>
   </div>
 </header>
@@ -95,10 +159,62 @@
   <a class="btn" href="https://wa.me/6287770055999" onclick="trackWA()">Daftar WhatsApp</a>
 </div>
 
-<div class="card">Speaking Confidence</div>
-<div class="card">Business English</div>
-<div class="card">Private Class</div>
+<!-- KENAPA -->
+<section class="section">
+  <h2>Kenapa Memilih EZOID?</h2>
+  <div class="card">Belajar cepat dan langsung fokus pada kemampuan berbicara</div>
+  <div class="card">Metode sederhana tanpa teori yang membingungkan</div>
+  <div class="card">Cocok untuk kebutuhan kerja, bisnis, dan kehidupan sehari-hari</div>
+  <div class="card">Bisa belajar fleksibel dengan bimbingan yang jelas</div>
+</section>
 
+<!-- PROGRAM -->
+<section class="section">
+  <h2>Program Belajar EZOID</h2>
+  <div class="card">Dasar Percakapan</div>
+  <div class="card">Pengembangan Skill</div>
+  <div class="card">Bahasa Inggris Profesional</div>
+</section>
+
+<!-- 💰 PAKET HARGA (FIX CUAN) -->
+<section class="section">
+  <h2>Paket Harga</h2>
+
+  <div class="paket-wrapper">
+    <div class="paket-box">
+      <h3>4 Jam</h3>
+      <b>Rp 400.000</b>
+    </div>
+
+    <div class="paket-box">
+      <h3>8 Jam</h3>
+      <b>Rp 800.000</b>
+    </div>
+
+    <div class="paket-box">
+      <h3>12 Jam</h3>
+      <b>Rp 1.200.000</b>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONI -->
+<section class="section">
+  <h2>Testimoni Siswa</h2>
+
+  <div class="card">"Sekarang saya lebih percaya diri berbicara Bahasa Inggris saat meeting kerja." — Andi, Karyawan Kantoran</div>
+  <div class="card">"Metode belajarnya sederhana dan mudah dipahami." — Sinta, Mahasiswa</div>
+  <div class="card">"Sangat membantu untuk interview kerja." — Budi, Pencari Kerja</div>
+  <div class="card">"Tidak membingungkan dan langsung praktik." — Rina, Guru</div>
+  <div class="card">"Cocok untuk komunikasi dengan klien luar negeri." — Daniel, Freelancer</div>
+  <div class="card">"Saya lebih berani berbicara di tempat kerja." — Fitri, Admin</div>
+  <div class="card">"Fokus ke percakapan sehari-hari sangat membantu." — Agus, Staff Operasional</div>
+  <div class="card">"Saya lebih siap kerja ke luar negeri." — Maria, Calon Pekerja Migran</div>
+  <div class="card">"Penjelasan mudah dipahami." — Rudi, Wirausaha</div>
+  <div class="card">"Cocok untuk pemula." — Lestari, Fresh Graduate</div>
+</section>
+
+<!-- WA -->
 <a class="wa" href="https://wa.me/6287770055999" onclick="trackWA()">
   WhatsApp
 </a>
@@ -119,9 +235,6 @@
 
   const ONE_DAY = 24 * 60 * 60 * 1000;
 
-  // =========================
-  // VISITOR 24 JAM
-  // =========================
   function handleVisitor() {
     const key = "ezoid_visit_24h";
     const now = Date.now();
@@ -133,9 +246,6 @@
     }
   }
 
-  // =========================
-  // WA CLICK 24 JAM
-  // =========================
   function trackWA() {
     const key = "ezoid_wa_24h";
     const now = Date.now();
@@ -147,9 +257,6 @@
     }
   }
 
-  // =========================
-  // REALTIME DISPLAY
-  // =========================
   db.ref("visitors").on("value", (snap) => {
     document.getElementById("visitor-count").innerText = snap.val() || 0;
   });
