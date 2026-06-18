@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EZOID</title>
+  <title>EZOID - Kursus Bahasa Inggris Modern</title>
 
   <style>
     body {
@@ -71,7 +71,6 @@
 <header>
   <h2>EZOID</h2>
 
-  <!-- PENGUNJUNG SEMENTARA (LOCAL) -->
   <div class="visitor">
     Pengunjung: <span id="visitor-count">0</span>
   </div>
@@ -89,18 +88,36 @@
 
 <a class="wa" href="https://wa.me/6287770055999">WhatsApp</a>
 
+<!-- 🔥 FIREBASE VISITOR REAL -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
 <script>
-  // SEMENTARA (LOCAL ONLY)
-  let count = localStorage.getItem("ezoid_visitors");
+  // CONFIG FIREBASE KAMU
+  const firebaseConfig = {
+    apiKey: "AIzaSyAtWHWo_KZptjHYxV2NDhQHb4zBpbXYyyA",
+    authDomain: "ezoid-8328d.firebaseapp.com",
+    databaseURL: "https://ezoid-8328d-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "ezoid-8328d",
+    storageBucket: "ezoid-8328d.firebasestorage.app",
+    messagingSenderId: "889301644842",
+    appId: "1:889301644842:web:c86467b84db01d904c7553"
+  };
 
-  if (!count) {
-    count = 1;
-  } else {
-    count = parseInt(count) + 1;
-  }
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
 
-  localStorage.setItem("ezoid_visitors", count);
-  document.getElementById("visitor-count").innerText = count;
+  const visitorRef = db.ref("visitors");
+
+  // tambah 1 setiap orang buka website
+  visitorRef.transaction((current) => {
+    return (current || 0) + 1;
+  });
+
+  // realtime update
+  visitorRef.on("value", (snapshot) => {
+    document.getElementById("visitor-count").innerText = snapshot.val();
+  });
 </script>
 
 </body>
