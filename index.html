@@ -20,6 +20,13 @@
       position: relative;
     }
 
+    header h2 {
+      font-size: 34px;
+      margin: 0;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
     .visitor {
       position: absolute;
       right: 10px;
@@ -66,7 +73,6 @@
     }
   </style>
 
-  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -78,15 +84,15 @@
   <h2>EZOID</h2>
 
   <div class="visitor">
-    Pengunjung: <span id="visitor-count">0</span><br>
-    <small>WA: <span id="wa-count">0</span></small>
+    Visitor Today: <span id="visitor-count">0</span><br>
+    WA Today: <span id="wa-count">0</span>
   </div>
 </header>
 
 <div class="hero">
   <h1>Belajar Bahasa Inggris Modern</h1>
   <p>Fokus Speaking & Karir</p>
-  <a class="btn" href="https://wa.me/6287770055999">Daftar WhatsApp</a>
+  <a class="btn" href="https://wa.me/6287770055999" onclick="trackWA()">Daftar WhatsApp</a>
 </div>
 
 <div class="card">Speaking Confidence</div>
@@ -98,9 +104,6 @@
 </a>
 
 <script>
-  // =========================
-  // FIREBASE CONFIG
-  // =========================
   const firebaseConfig = {
     apiKey: "AIzaSyAtWHWo_KZptjHYxV2NDhQHb4zBpbXYyyA",
     authDomain: "ezoid-8328d.firebaseapp.com",
@@ -114,33 +117,48 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  // =========================
-  // VISITOR COUNTER
-  // =========================
-  const visitorRef = db.ref("visitors");
-
-  visitorRef.transaction((current) => {
-    return (current || 0) + 1;
-  });
-
-  visitorRef.on("value", (snapshot) => {
-    document.getElementById("visitor-count").innerText = snapshot.val() || 0;
-  });
+  const ONE_DAY = 24 * 60 * 60 * 1000;
 
   // =========================
-  // WHATSAPP CLICK COUNTER
+  // VISITOR 24 JAM
   // =========================
-  const waRef = db.ref("whatsapp_clicks");
+  function handleVisitor() {
+    const key = "ezoid_visit_24h";
+    const now = Date.now();
+    const last = localStorage.getItem(key);
 
-  waRef.on("value", (snapshot) => {
-    document.getElementById("wa-count").innerText = snapshot.val() || 0;
-  });
-
-  function trackWA() {
-    waRef.transaction((current) => {
-      return (current || 0) + 1;
-    });
+    if (!last || (now - last > ONE_DAY)) {
+      db.ref("visitors").transaction((cur) => (cur || 0) + 1);
+      localStorage.setItem(key, now);
+    }
   }
+
+  // =========================
+  // WA CLICK 24 JAM
+  // =========================
+  function trackWA() {
+    const key = "ezoid_wa_24h";
+    const now = Date.now();
+    const last = localStorage.getItem(key);
+
+    if (!last || (now - last > ONE_DAY)) {
+      db.ref("whatsapp_clicks").transaction((cur) => (cur || 0) + 1);
+      localStorage.setItem(key, now);
+    }
+  }
+
+  // =========================
+  // REALTIME DISPLAY
+  // =========================
+  db.ref("visitors").on("value", (snap) => {
+    document.getElementById("visitor-count").innerText = snap.val() || 0;
+  });
+
+  db.ref("whatsapp_clicks").on("value", (snap) => {
+    document.getElementById("wa-count").innerText = snap.val() || 0;
+  });
+
+  handleVisitor();
 </script>
 
 </body>
