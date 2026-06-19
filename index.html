@@ -1,160 +1,119 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EZOID</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EZOID</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: #f4f8ff;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #f4f8ff;
+}
 
-    header {
-      background: linear-gradient(135deg, #1e88e5, #42a5f5);
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
+header {
+  background: linear-gradient(135deg, #1e88e5, #42a5f5);
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
 
-    header h2 {
-      font-size: 34px;
-      margin: 0;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
+header h2 {
+  margin: 0;
+  font-size: 34px;
+}
 
-    /* HERO */
-    .hero {
-      text-align: center;
-      padding: 50px 20px;
-    }
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+}
 
-    .btn {
-      background: #25D366;
-      color: white;
-      padding: 12px 18px;
-      text-decoration: none;
-      border-radius: 8px;
-      display: inline-block;
-      margin-top: 10px;
-    }
+.btn {
+  background: #25D366;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+}
 
-    /* CARD */
-    .card {
-      background: white;
-      margin: 10px auto;
-      padding: 15px;
-      border-radius: 12px;
-      max-width: 600px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      text-align: center;
-    }
+/* SECTION & CARD */
+.section {
+  padding: 20px;
+  text-align: center;
+}
 
-    .section {
-      padding: 20px;
-      text-align: center;
-    }
+.section h2 {
+  color: #1e88e5;
+  margin-bottom: 15px;
+}
 
-    .section h2 {
-      margin-bottom: 15px;
-      color: #1e88e5;
-      font-size: 20px;
-    }
+.card {
+  background: white;
+  margin: 10px auto;
+  padding: 15px;
+  border-radius: 12px;
+  max-width: 600px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
 
-    /* 💰 PAKET */
-    .paket-wrapper {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
+/* PAKET */
+.paket-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
 
-    .paket-box {
-      background: white;
-      padding: 20px;
-      width: 150px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      text-align: center;
-      transition: 0.2s;
-    }
+.paket-box {
+  background: white;
+  padding: 20px;
+  width: 150px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
 
-    .paket-box:hover {
-      transform: translateY(-5px);
-    }
+/* FLOATING VISITOR & WA */
+.floating-buttons {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  gap: 8px;
+  z-index: 9999;
+}
 
-    .paket-box h3 {
-      margin: 0;
-      font-size: 18px;
-    }
+.float-btn {
+  background: #6b6b6b;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+}
 
-    .paket-box b {
-      display: block;
-      margin-top: 10px;
-      font-size: 16px;
-    }
+/* WA FLOAT */
+.wa {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  padding: 12px;
+  border-radius: 50px;
+  text-decoration: none;
+  z-index: 9999;
+}
+</style>
 
-    /* WA BUTTON */
-    .wa {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #25D366;
-      color: white;
-      padding: 12px;
-      border-radius: 50px;
-      text-decoration: none;
-      z-index: 9999;
-    }
-
-    /* 🔵 DOT LIVE */
-    .live-dot {
-      display: inline-block;
-      width: 9px;
-      height: 9px;
-      background-color: #00ff4c;
-      border-radius: 50%;
-      margin-right: 6px;
-      animation: pulse 2.8s infinite ease-in-out;
-      vertical-align: middle;
-      box-shadow: 0 0 8px rgba(0,255,76,0.6);
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.4); opacity: 0.4; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    /* 🔥 FLOATING COUNTER */
-    .floating-counter {
-      position: fixed;
-      top: 12px;
-      right: 12px;
-      background: rgba(20, 20, 20, 0.88);
-      color: white;
-      padding: 10px 12px;
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-      font-size: 12px;
-      z-index: 9999;
-      text-align: left;
-      line-height: 1.5;
-      backdrop-filter: blur(6px);
-      min-width: 140px;
-    }
-
-    .floating-item {
-      margin-bottom: 4px;
-    }
-  </style>
-
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 </head>
 
 <body>
@@ -163,16 +122,10 @@
   <h2>EZOID</h2>
 </header>
 
-<!-- 🔵 FLOATING VISITOR + WA -->
-<div class="floating-counter">
-  <div class="floating-item">
-    <span class="live-dot"></span>
-    Visitor Today: <span id="visitor-count">0</span>
-  </div>
-
-  <div class="floating-item">
-    WA Today: <span id="wa-count">0</span>
-  </div>
+<!-- FLOATING COUNTER -->
+<div class="floating-buttons">
+  <div class="float-btn">👁 Visitor Today <span id="visitor-count">0</span></div>
+  <div class="float-btn">💬 WA Today <span id="wa-count">0</span></div>
 </div>
 
 <!-- HERO -->
@@ -199,98 +152,65 @@
   <div class="card">Bahasa Inggris Profesional</div>
 </section>
 
-<!-- 💰 PAKET HARGA -->
+<!-- PAKET -->
 <section class="section">
   <h2>Paket Harga</h2>
-
   <div class="paket-wrapper">
-
-    <div class="paket-box">
-      <h3>4 Jam</h3>
-      <b>Rp 400.000</b>
-    </div>
-
-    <div class="paket-box">
-      <h3>8 Jam</h3>
-      <b>Rp 800.000</b>
-    </div>
-
-    <div class="paket-box">
-      <h3>12 Jam</h3>
-      <b>Rp 1.200.000</b>
-    </div>
-
+    <div class="paket-box"><h3>4 Jam</h3><b>Rp 400.000</b></div>
+    <div class="paket-box"><h3>8 Jam</h3><b>Rp 800.000</b></div>
+    <div class="paket-box"><h3>12 Jam</h3><b>Rp 1.200.000</b></div>
   </div>
 </section>
 
 <!-- TESTIMONI -->
 <section class="section">
   <h2>Testimoni Siswa</h2>
-
-  <div class="card">"Sekarang saya lebih percaya diri berbicara Bahasa Inggris saat meeting kerja." — Andi, Karyawan Kantoran</div>
-  <div class="card">"Metode belajarnya sederhana dan mudah dipahami." — Sinta, Mahasiswa</div>
-  <div class="card">"Sangat membantu untuk interview kerja." — Budi, Pencari Kerja</div>
-  <div class="card">"Tidak membingungkan dan langsung praktik." — Rina, Guru</div>
-  <div class="card">"Cocok untuk komunikasi dengan klien luar negeri." — Daniel, Freelancer</div>
-  <div class="card">"Saya lebih berani berbicara di tempat kerja." — Fitri, Admin</div>
-  <div class="card">"Fokus ke percakapan sehari-hari sangat membantu." — Agus, Staff Operasional</div>
-  <div class="card">"Saya lebih siap kerja ke luar negeri." — Maria, Calon Pekerja Migran</div>
-  <div class="card">"Penjelasan mudah dipahami." — Rudi, Wirausaha</div>
-  <div class="card">"Cocok untuk pemula." — Lestari, Fresh Graduate</div>
+  <div class="card">"Sekarang saya lebih percaya diri berbicara Bahasa Inggris saat meeting kerja." — Andi</div>
+  <div class="card">"Metode belajarnya sederhana dan mudah dipahami." — Sinta</div>
+  <div class="card">"Sangat membantu untuk persiapan interview kerja." — Budi</div>
+  <div class="card">"Tidak membingungkan dan langsung praktik." — Rina</div>
+  <div class="card">"Cocok untuk komunikasi dengan klien luar negeri." — Daniel</div>
+  <div class="card">"Saya jadi lebih berani berbicara di tempat kerja." — Fitri</div>
+  <div class="card">"Fokus ke percakapan sehari-hari." — Agus</div>
+  <div class="card">"Saya lebih siap kerja ke luar negeri." — Maria</div>
+  <div class="card">"Penjelasan tutor jelas dan gampang diikuti." — Rudi</div>
+  <div class="card">"Cocok banget buat pemula." — Lestari</div>
 </section>
 
-<!-- WA FLOAT -->
-<a class="wa" href="https://wa.me/6287770055999" onclick="trackWA()">
-  WhatsApp
-</a>
+<a class="wa" href="https://wa.me/6287770055999" onclick="trackWA()">WhatsApp</a>
 
 <script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyAtWHWo_KZptjHYX1V2NDhQHb4zBpbXYyyA",
-    authDomain: "ezoid-8328d.firebaseapp.com",
-    databaseURL: "https://ezoid-8328d-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "ezoid-8328d",
-    storageBucket: "ezoid-8328d.firebasestorage.app",
-    messagingSenderId: "889301644842",
-    appId: "1:889301644842:web:c86467b84db01d904c7553"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyAtWHWo_KZptjHYX1V2NDhQHb4zBpbXYyyA",
+  authDomain: "ezoid-8328d.firebaseapp.com",
+  databaseURL: "https://ezoid-8328d-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "ezoid-8328d",
+  storageBucket: "ezoid-8328d.firebasestorage.app",
+  messagingSenderId: "889301644842",
+  appId: "1:889301644842:web:c86467b84db01d904c7553"
+};
 
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const today = new Date().toISOString().split("T")[0];
 
-  const ONE_DAY = 24 * 60 * 60 * 1000;
+function visitToday() {
+  db.ref("visitors/" + today).transaction(v => (v || 0) + 1);
+}
 
-  function handleVisitor() {
-    const key = "ezoid_visit_24h";
-    const now = Date.now();
-    const last = localStorage.getItem(key);
+function trackWA() {
+  db.ref("whatsapp/" + today).transaction(v => (v || 0) + 1);
+}
 
-    if (!last || (now - last > ONE_DAY)) {
-      db.ref("visitors").transaction((cur) => (cur || 0) + 1);
-      localStorage.setItem(key, now);
-    }
-  }
+db.ref("visitors/" + today).on("value", s => {
+  document.getElementById("visitor-count").innerText = s.val() || 0;
+});
 
-  function trackWA() {
-    const key = "ezoid_wa_24h";
-    const now = Date.now();
-    const last = localStorage.getItem(key);
+db.ref("whatsapp/" + today).on("value", s => {
+  document.getElementById("wa-count").innerText = s.val() || 0;
+});
 
-    if (!last || (now - last > ONE_DAY)) {
-      db.ref("whatsapp_clicks").transaction((cur) => (cur || 0) + 1);
-      localStorage.setItem(key, now);
-    }
-  }
-
-  db.ref("visitors").on("value", (snap) => {
-    document.getElementById("visitor-count").innerText = snap.val() || 0;
-  });
-
-  db.ref("whatsapp_clicks").on("value", (snap) => {
-    document.getElementById("wa-count").innerText = snap.val() || 0;
-  });
-
-  handleVisitor();
+visitToday();
 </script>
 
 </body>
