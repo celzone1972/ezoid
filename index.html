@@ -17,11 +17,28 @@ header {
   color: white;
   text-align: center;
   padding: 20px;
+  padding-bottom: 30px;
 }
 
 header h2 {
   margin: 0;
   font-size: 34px;
+}
+
+/* COUNTER BAWAH HEADER - MOBILE AMAN */
+.header-counter {
+  display: flex;
+  justify-content: center;
+  margin-top: -8px;
+}
+
+.counter-box {
+  background: #ffffff;
+  color: #333;
+  padding: 6px 14px;
+  font-size: 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
 /* HERO */
@@ -76,28 +93,6 @@ header h2 {
   box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 
-/* FLOATING VISITOR & WA */
-.floating-buttons {
-  position: fixed;
-  top: 14px;
-  right: 14px;
-  display: flex;
-  gap: 8px;
-  z-index: 9999;
-}
-
-.float-btn {
-  background: #6b6b6b;
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
-}
-
 /* WA FLOAT */
 .wa {
   position: fixed;
@@ -122,10 +117,11 @@ header h2 {
   <h2>EZOID</h2>
 </header>
 
-<!-- FLOATING COUNTER -->
-<div class="floating-buttons">
-  <div class="float-btn">👁 Visitor Today <span id="visitor-count">0</span></div>
-  <div class="float-btn">💬 WA Today <span id="wa-count">0</span></div>
+<!-- COUNTER -->
+<div class="header-counter">
+  <div class="counter-box">
+    Visitor: <span id="visitor-count">0</span> | WA: <span id="wa-count">0</span>
+  </div>
 </div>
 
 <!-- HERO -->
