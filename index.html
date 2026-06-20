@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EZOID</title>
 
-<!-- Google Search Console Verification -->
 <meta name="google-site-verification" content="OwspWn6Wa6h7cf8x7PRQ6uGemFvr8JyqvcIoGF023k0" />
 
 <style>
@@ -28,7 +27,6 @@ header h2 {
   font-size: 34px;
 }
 
-/* COUNTER BAWAH HEADER - MOBILE AMAN */
 .header-counter {
   display: flex;
   justify-content: center;
@@ -44,7 +42,6 @@ header h2 {
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
-/* HERO */
 .hero {
   text-align: center;
   padding: 50px 20px;
@@ -60,7 +57,6 @@ header h2 {
   margin-top: 10px;
 }
 
-/* SECTION & CARD */
 .section {
   padding: 20px;
   text-align: center;
@@ -80,7 +76,6 @@ header h2 {
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-/* PAKET */
 .paket-wrapper {
   display: flex;
   justify-content: center;
@@ -96,7 +91,6 @@ header h2 {
   box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 
-/* WA FLOAT */
 .wa {
   position: fixed;
   bottom: 20px;
@@ -124,7 +118,6 @@ header h2 {
   50%{opacity:0.3;}
   100%{opacity:1;}
 }
-
 </style>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -137,21 +130,19 @@ header h2 {
   <h2>EZOID</h2>
 </header>
 
-<!-- COUNTER -->
 <div class="header-counter">
   <div class="counter-box">
-    <span class="online-dot"></span>Visitor Today: <span id="visitor-count">0</span> | WA Today: <span id="wa-count">0</span>
+    <span class="online-dot"></span>
+    Visitor Today: <span id="visitor-count">0</span> | WA Today: <span id="wa-count">0</span>
   </div>
 </div>
 
-<!-- HERO -->
 <div class="hero">
   <h1>Belajar Bahasa Inggris Modern</h1>
   <p>Fokus Speaking & Karir</p>
   <a class="btn" href="https://wa.me/6287770055999" onclick="trackWA()">Daftar WhatsApp</a>
 </div>
 
-<!-- KENAPA -->
 <section class="section">
   <h2>Kenapa Memilih EZOID?</h2>
   <div class="card">Belajar cepat dan langsung fokus pada kemampuan berbicara</div>
@@ -160,7 +151,6 @@ header h2 {
   <div class="card">Bisa belajar fleksibel dengan bimbingan yang jelas</div>
 </section>
 
-<!-- PROGRAM -->
 <section class="section">
   <h2>Program Belajar EZOID</h2>
   <div class="card">Dasar Percakapan</div>
@@ -168,7 +158,6 @@ header h2 {
   <div class="card">Bahasa Inggris Profesional</div>
 </section>
 
-<!-- PAKET -->
 <section class="section">
   <h2>Paket Harga</h2>
   <div class="paket-wrapper">
@@ -178,19 +167,11 @@ header h2 {
   </div>
 </section>
 
-<!-- TESTIMONI -->
 <section class="section">
   <h2>Testimoni Siswa</h2>
-  <div class="card">"Sekarang saya lebih percaya diri berbicara Bahasa Inggris saat meeting kerja." — Andi, Staff Kantoran</div>
-  <div class="card">"Metode belajarnya sederhana dan mudah dipahami." — Sinta, Fresh Graduate</div>
-  <div class="card">"Sangat membantu untuk persiapan interview kerja." — Budi, Job Seeker</div>
-  <div class="card">"Tidak membingungkan dan langsung praktik." — Rina, Karyawan Swasta</div>
-  <div class="card">"Cocok untuk komunikasi dengan klien luar negeri." — Daniel, Freelancer</div>
-  <div class="card">"Saya jadi lebih berani berbicara di tempat kerja." — Fitri, Admin Perusahaan</div>
-  <div class="card">"Fokus ke percakapan sehari-hari." — Agus, Mahasiswa</div>
-  <div class="card">"Saya lebih siap kerja ke luar negeri." — Maria, Calon Pekerja Migran</div>
-  <div class="card">"Penjelasan tutor jelas dan gampang diikuti." — Rudi, Supervisor</div>
-  <div class="card">"Cocok banget buat pemula." — Lestari, Ibu Rumah Tangga</div>
+  <div class="card">"Sekarang saya lebih percaya diri..." — Andi</div>
+  <div class="card">"Metode sederhana..." — Sinta</div>
+  <div class="card">"Sangat membantu..." — Budi</div>
 </section>
 
 <a class="wa" href="https://wa.me/6287770055999" onclick="trackWA()">WhatsApp</a>
@@ -208,7 +189,16 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
-const today = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Jakarta" });
+
+/* FIX WIB STABLE */
+function getWIBDateKey() {
+  const now = new Date();
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+  const wib = new Date(utc + (7 * 60 * 60000));
+  return `${wib.getFullYear()}-${wib.getMonth()+1}-${wib.getDate()}`;
+}
+
+const today = getWIBDateKey();
 
 function visitToday() {
   db.ref("visitors/" + today).transaction(v => (v || 0) + 1);
