@@ -108,6 +108,23 @@ header h2 {
   text-decoration: none;
   z-index: 9999;
 }
+
+.online-dot{
+  display:inline-block;
+  width:10px;
+  height:10px;
+  background:#00cc00;
+  border-radius:50%;
+  margin-right:6px;
+  animation:blink 2s infinite;
+}
+
+@keyframes blink{
+  0%{opacity:1;}
+  50%{opacity:0.3;}
+  100%{opacity:1;}
+}
+
 </style>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -123,7 +140,7 @@ header h2 {
 <!-- COUNTER -->
 <div class="header-counter">
   <div class="counter-box">
-    Visitor Today: <span id="visitor-count">0</span> | WA Today: <span id="wa-count">0</span>
+    <span class="online-dot"></span>Visitor Today: <span id="visitor-count">0</span> | WA Today: <span id="wa-count">0</span>
   </div>
 </div>
 
@@ -191,7 +208,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
-const today = new Date().toISOString().split("T")[0];
+const today = new Date().toLocaleDateString("en-CA", { timeZone: "Asia/Jakarta" });
 
 function visitToday() {
   db.ref("visitors/" + today).transaction(v => (v || 0) + 1);
