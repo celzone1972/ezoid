@@ -2,13 +2,13 @@
 <html lang="id">
 <head>
 <!-- Google tag (GA4) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M97J4NLRKL"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JXQV5PEDV3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-M97J4NLRKL');
+  gtag('config', 'G-JXQV5PEDV3');
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -222,21 +222,19 @@ function getWIBDateKey() {
   return `${wib.getFullYear()}-${wib.getMonth()+1}-${wib.getDate()}`;
 }
 
-const today = getWIBDateKey();
-
 function visitToday() {
-  db.ref("visitors/" + today).transaction(v => (v || 0) + 1);
+  db.ref("visitors/" + getWIBDateKey()).transaction(v => (v || 0) + 1);
 }
 
 function trackWA() {
-  db.ref("whatsapp/" + today).transaction(v => (v || 0) + 1);
+  db.ref("whatsapp/" + getWIBDateKey()).transaction(v => (v || 0) + 1);
 }
 
-db.ref("visitors/" + today).on("value", s => {
+db.ref("visitors/" + getWIBDateKey()).on("value", s => {
   document.getElementById("visitor-count").innerText = s.val() || 0;
 });
 
-db.ref("whatsapp/" + today).on("value", s => {
+db.ref("whatsapp/" + getWIBDateKey()).on("value", s => {
   document.getElementById("wa-count").innerText = s.val() || 0;
 });
 
