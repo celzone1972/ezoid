@@ -65,7 +65,7 @@ header h2 {
 .btn {
   background: #25D366;
   color: white;
-  padding: 12px 18px;
+  padding: 10px 16px;
   border-radius: 8px;
   text-decoration: none;
   display: inline-block;
@@ -112,7 +112,7 @@ header h2 {
   right: 20px;
   background: #25D366;
   color: white;
-  padding: 12px;
+  padding: 10px;
   border-radius: 50px;
   text-decoration: none;
   z-index: 9999;
@@ -133,6 +133,16 @@ header h2 {
   50%{opacity:0.3;}
   100%{opacity:1;}
 }
+
+.service-clock{display:flex;flex-direction:column;align-items:center;margin-top:24px}
+.clock{width:160px;height:160px;border:5px solid #1e88e5;border-radius:50%;position:relative;background:#fff}
+.hand{position:absolute;left:50%;bottom:50%;transform-origin:bottom center;background:#333;border-radius:2px}
+.hour{width:5px;height:40px;margin-left:-2.5px}
+.minute{width:3px;height:55px;margin-left:-1.5px}
+.second{width:2px;height:65px;background:#1e88e5;margin-left:-1px}
+.centerdot{position:absolute;left:50%;top:50%;width:10px;height:10px;background:#1e88e5;border-radius:50%;transform:translate(-50%,-50%)}
+@media(max-width:768px){.clock{width:140px;height:140px}.btn{padding:10px 16px;font-size:15px}.wa{padding:10px;font-size:14px}}
+
 </style>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -157,6 +167,16 @@ header h2 {
   <p>Untuk kebutuhan sehari-hari, akademik, dan profesional</p>
   <p>Tersedia kelas Online/Offline</p>
   <a class="btn" href="https://wa.me/6287770055999" onclick="trackWA()">Daftar WhatsApp</a>
+</div>
+
+<div class="service-clock">
+<div class="clock">
+<div class="hand hour" id="hour"></div>
+<div class="hand minute" id="minute"></div>
+<div class="hand second" id="second"></div>
+<div class="centerdot"></div>
+</div>
+<p><b>Jam Layanan</b><br>Setiap hari 09.00–21.00 WIB</p>
 </div>
 
 <section class="section">
@@ -239,6 +259,16 @@ db.ref("whatsapp/" + getWIBDateKey()).on("value", s => {
 });
 
 visitToday();
+
+function tickClock(){
+const n=new Date();
+let h=n.getHours()%12,m=n.getMinutes(),s=n.getSeconds();
+hour.style.transform=`translateX(-50%) rotate(${h*30+m/2}deg)`;
+minute.style.transform=`translateX(-50%) rotate(${m*6}deg)`;
+second.style.transform=`translateX(-50%) rotate(${s*6}deg)`;
+}
+setInterval(tickClock,1000);tickClock();
+
 </script>
 
 </body>
