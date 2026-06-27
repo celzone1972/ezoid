@@ -1,152 +1,155 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<!-- Google tag (GA4) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JXQV5PEDV3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-JXQV5PEDV3');
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EZOID</title>
+
 <link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
-  <rect width='100' height='100' fill='%231e88e5'/>
-  <text x='50' y='72' font-size='75' font-weight='900'
-        text-anchor='middle' fill='white'
-        font-family='Arial'>E</text>
+<rect width='100' height='100' fill='%231e88e5'/>
+<text x='50' y='72' font-size='75' font-weight='900' text-anchor='middle' fill='white'>E</text>
 </svg>">
-<meta name="google-site-verification" content="OwspWn6Wa6h7cf8x7PRQ6uGemFvr8JyqvcIoGF023k0" />
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial;
-  background: #f4f8ff;
+body{margin:0;font-family:Arial;background:#f4f8ff}
+
+/* HEADER */
+header{
+  background:linear-gradient(135deg,#1e88e5,#42a5f5);
+  color:white;
+  text-align:center;
+  padding:20px;
+}
+header h2{margin:0;font-size:34px}
+
+/* COUNTER */
+.header-counter{
+  display:flex;
+  justify-content:center;
+  margin-top:-10px;
 }
 
-header {
-  background: linear-gradient(135deg, #1e88e5, #42a5f5);
-  color: white;
-  text-align: center;
-  padding: 20px;
-  padding-bottom: 30px;
-}
-
-header h2 {
-  margin: 0;
-  font-size: 34px;
-}
-
-.header-counter {
-  display: flex;
-  justify-content: center;
-  margin-top: -8px;
-}
-
-.counter-box {
-  background: #ffffff;
-  color: #333;
-  padding: 6px 14px;
-  font-size: 12px;
-  border-radius: 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
-
-.hero {
-  text-align: center;
-  padding: 50px 20px;
-}
-
-.btn {
-  background: #25D366;
-  color: white;
-  padding: 10px 16px;
-  border-radius: 8px;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 10px;
-}
-
-.section {
-  padding: 20px;
-  text-align: center;
-}
-
-.section h2 {
-  color: #1e88e5;
-  margin-bottom: 15px;
-}
-
-.card {
-  background: white;
-  margin: 10px auto;
-  padding: 15px;
-  border-radius: 12px;
-  max-width: 600px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.paket-wrapper {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.paket-box {
-  background: white;
-  padding: 20px;
-  width: 150px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
-
-.wa {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #25D366;
-  color: white;
-  padding: 10px;
-  border-radius: 50px;
-  text-decoration: none;
-  z-index: 9999;
+.counter-box{
+  background:#fff;
+  padding:6px 14px;
+  border-radius:20px;
+  font-size:12px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.15);
 }
 
 .online-dot{
-  display:inline-block;
-  width:10px;
-  height:10px;
+  width:10px;height:10px;
   background:#00cc00;
   border-radius:50%;
+  display:inline-block;
   margin-right:6px;
   animation:blink 2s infinite;
 }
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
 
-@keyframes blink{
-  0%{opacity:1;}
-  50%{opacity:0.3;}
-  100%{opacity:1;}
+/* HERO */
+.hero{text-align:center;padding:40px 20px}
+.btn{
+  background:#25D366;
+  color:white;
+  padding:10px 16px;
+  border-radius:8px;
+  text-decoration:none;
 }
 
-.service-clock{display:flex;flex-direction:column;align-items:center;margin-top:24px}
-.clock{width:160px;height:160px;border:5px solid #1e88e5;border-radius:50%;position:relative;background:#fff}
-.hand{position:absolute;left:50%;bottom:50%;transform-origin:bottom center;background:#333;border-radius:2px}
+/* CLOCK */
+.service-clock{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-top:20px;
+}
+
+.clock{
+  width:160px;height:160px;
+  border-radius:50%;
+  position:relative;
+  background:radial-gradient(circle at 30% 30%, #fff6d1, #f5d77a 40%, #d4af37 100%);
+  border:6px solid #d4af37;
+  box-shadow:0 10px 25px rgba(0,0,0,0.15), inset 0 0 10px rgba(255,255,255,0.6);
+}
+
+.marker{
+  position:absolute;
+  width:2px;
+  height:10px;
+  background:#8a6b00;
+  top:10px;
+  left:50%;
+  transform-origin:center 70px;
+}
+
+.marker.long{height:14px;width:3px}
+
+.brand{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:11px;
+  font-weight:bold;
+  color:#6b5200;
+  letter-spacing:1px;
+}
+
+.hand{
+  position:absolute;
+  left:50%;
+  bottom:50%;
+  transform-origin:bottom center;
+  background:#333;
+  border-radius:2px;
+}
+
 .hour{width:5px;height:40px;margin-left:-2.5px}
 .minute{width:3px;height:55px;margin-left:-1.5px}
 .second{width:2px;height:65px;background:#1e88e5;margin-left:-1px}
-.centerdot{position:absolute;left:50%;top:50%;width:10px;height:10px;background:#1e88e5;border-radius:50%;transform:translate(-50%,-50%)}
-@media(max-width:768px){.clock{width:140px;height:140px}.btn{padding:10px 16px;font-size:15px}.wa{padding:10px;font-size:14px}}
 
+.centerdot{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:10px;
+  height:10px;
+  background:#1e88e5;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+}
+
+/* SECTION */
+.section{text-align:center;padding:20px}
+.card{
+  background:#fff;
+  margin:10px auto;
+  padding:15px;
+  border-radius:12px;
+  max-width:600px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* WA */
+.wa{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:white;
+  padding:10px;
+  border-radius:50px;
+  text-decoration:none;
+}
 </style>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
 </head>
 
 <body>
@@ -165,57 +168,73 @@ header h2 {
 <div class="hero">
   <h1>Privat Bahasa Inggris</h1>
   <p>Untuk kebutuhan sehari-hari, akademik, dan profesional</p>
-  <p>Tersedia kelas Online/Offline</p>
   <a class="btn" href="https://wa.me/6287770055999" onclick="trackWA()">Daftar WhatsApp</a>
 </div>
 
 <div class="service-clock">
-<div class="clock">
-<div class="hand hour" id="hour"></div>
-<div class="hand minute" id="minute"></div>
-<div class="hand second" id="second"></div>
-<div class="centerdot"></div>
-</div>
-<p><b>Jam Layanan</b><br>Setiap hari 09.00–21.00 WIB</p>
+  <div class="clock">
+
+    <div class="marker long" style="transform:rotate(0deg)"></div>
+    <div class="marker" style="transform:rotate(30deg)"></div>
+    <div class="marker" style="transform:rotate(60deg)"></div>
+    <div class="marker" style="transform:rotate(90deg)"></div>
+    <div class="marker" style="transform:rotate(120deg)"></div>
+    <div class="marker" style="transform:rotate(150deg)"></div>
+    <div class="marker" style="transform:rotate(180deg)"></div>
+    <div class="marker" style="transform:rotate(210deg)"></div>
+    <div class="marker" style="transform:rotate(240deg)"></div>
+    <div class="marker" style="transform:rotate(270deg)"></div>
+    <div class="marker" style="transform:rotate(300deg)"></div>
+    <div class="marker" style="transform:rotate(330deg)"></div>
+
+    <div class="brand">EZOID</div>
+
+    <div class="hand hour" id="hour"></div>
+    <div class="hand minute" id="minute"></div>
+    <div class="hand second" id="second"></div>
+    <div class="centerdot"></div>
+
+  </div>
+
+  <p style="text-align:center;font-weight:bold;color:#1e88e5;margin-top:10px">
+    Jam Layanan: 09.00–21.00 WIB
+  </p>
 </div>
 
 <section class="section">
   <h2>Kenapa Memilih EZOID?</h2>
-  <div class="card">Belajar cepat dan langsung fokus pada kemampuan berbicara</div>
-  <div class="card">Metode sederhana tanpa teori yang membingungkan</div>
-  <div class="card">Cocok untuk kebutuhan kerja, bisnis, dan kehidupan sehari-hari</div>
-  <div class="card">Bisa belajar fleksibel dengan bimbingan yang jelas</div>
+  <div class="card">Belajar cepat & fokus speaking</div>
+  <div class="card">Metode simpel tanpa ribet</div>
+  <div class="card">Cocok kerja & bisnis</div>
+  <div class="card">Fleksibel & jelas</div>
 </section>
 
 <section class="section">
   <h2>Program Belajar EZOID</h2>
   <div class="card">Dasar Percakapan</div>
-  <div class="card">Pengembangan Skill</div>
-  <div class="card">Bahasa Inggris Profesional</div>
+  <div class="card">Skill Development</div>
+  <div class="card">Professional English</div>
 </section>
 
 <section class="section">
   <h2>Paket Harga</h2>
-  <div class="paket-wrapper">
-    <div class="paket-box"><h3>4 Jam</h3><b>Rp 400.000</b></div>
-    <div class="paket-box"><h3>8 Jam</h3><b>Rp 800.000</b></div>
-    <div class="paket-box"><h3>12 Jam</h3><b>Rp 1.200.000</b></div>
-  </div>
+  <div class="card">4 Jam - Rp 400.000</div>
+  <div class="card">8 Jam - Rp 800.000</div>
+  <div class="card">12 Jam - Rp 1.200.000</div>
 </section>
 
 <section class="section">
   <h2>Testimoni Siswa</h2>
-
-  <div class="card">"Sekarang saya lebih percaya diri berbicara Bahasa Inggris saat meeting kerja." — Andi, Staff Kantoran</div>
-  <div class="card">"Metode belajarnya sederhana dan mudah dipahami." — Sinta, Fresh Graduate</div>
-  <div class="card">"Sangat membantu untuk persiapan interview kerja." — Budi, Job Seeker</div>
-  <div class="card">"Tidak membingungkan dan langsung praktik." — Rina, Karyawan Swasta</div>
-  <div class="card">"Cocok untuk komunikasi dengan klien luar negeri." — Daniel, Freelancer</div>
-  <div class="card">"Saya jadi lebih berani berbicara di tempat kerja." — Fitri, Admin Perusahaan</div>
-  <div class="card">"Fokus ke percakapan sehari-hari." — Agus, Mahasiswa</div>
-  <div class="card">"Saya lebih siap kerja ke luar negeri." — Maria, Calon Pekerja Migran</div>
-  <div class="card">"Penjelasan tutor jelas dan gampang diikuti." — Rudi, Supervisor</div>
-  <div class="card">"Cocok banget buat pemula." — Lestari, Ibu Rumah Tangga</div>
+  <div class="card">"Lebih percaya diri." — Andi, Staff Kantor</div>
+  <div class="card">"Mudah dipahami." — Sinta, Fresh Graduate</div>
+  <div class="card">"Cocok kerja." — Budi, Job Seeker</div>
+  <div class="card">"Langsung praktik." — Rina, Karyawan</div>
+  <div class="card">"Bisa klien luar negeri." — Daniel, Freelancer</div>
+  <div class="card">"Lebih berani ngomong." — Fitri, Admin</div>
+  <div class="card">"Fokus percakapan." — Agus, Mahasiswa</div>
+  <div class="card">"Siap kerja luar negeri." — Maria, Calon TKI</div>
+  <div class="card">"Penjelasan jelas." — Rudi, Supervisor</div>
+  <div class="card">"Cocok pemula." — Lestari, Ibu Rumah Tangga</div>
 </section>
 
 <a class="wa" href="https://wa.me/6287770055999" onclick="trackWA()">WhatsApp</a>
@@ -234,41 +253,49 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-/* FIX WIB STABLE */
-function getWIBDateKey() {
+function getWIBDateKey(){
   const now = new Date();
-  const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-  const wib = new Date(utc + (7 * 60 * 60000));
+  const utc = now.getTime() + now.getTimezoneOffset()*60000;
+  const wib = new Date(utc + 7*60*60000);
   return `${wib.getFullYear()}-${wib.getMonth()+1}-${wib.getDate()}`;
 }
 
-function visitToday() {
-  db.ref("visitors/" + getWIBDateKey()).transaction(v => (v || 0) + 1);
-}
+const key = getWIBDateKey();
 
-function trackWA() {
-  db.ref("whatsapp/" + getWIBDateKey()).transaction(v => (v || 0) + 1);
-}
-
-db.ref("visitors/" + getWIBDateKey()).on("value", s => {
-  document.getElementById("visitor-count").innerText = s.val() || 0;
+db.ref("visitors/"+key).on("value", s=>{
+  document.getElementById("visitor-count").innerText = s.val() ?? 0;
 });
 
-db.ref("whatsapp/" + getWIBDateKey()).on("value", s => {
-  document.getElementById("wa-count").innerText = s.val() || 0;
+db.ref("whatsapp/"+key).on("value", s=>{
+  document.getElementById("wa-count").innerText = s.val() ?? 0;
 });
 
-visitToday();
+db.ref("visitors/"+key).transaction(v=>(v||0)+1);
 
+/* CLOCK TICK MODE */
 function tickClock(){
-const n=new Date();
-let h=n.getHours()%12,m=n.getMinutes(),s=n.getSeconds();
-hour.style.transform=`translateX(-50%) rotate(${h*30+m/2}deg)`;
-minute.style.transform=`translateX(-50%) rotate(${m*6}deg)`;
-second.style.transform=`translateX(-50%) rotate(${s*6}deg)`;
-}
-setInterval(tickClock,1000);tickClock();
+  const now = new Date();
 
+  const s = now.getSeconds();
+  const m = now.getMinutes();
+  const h = now.getHours() % 12;
+
+  document.getElementById("hour").style.transform =
+    `translateX(-50%) rotate(${(h + m/60)*30}deg)`;
+
+  document.getElementById("minute").style.transform =
+    `translateX(-50%) rotate(${(m + s/60)*6}deg)`;
+
+  document.getElementById("second").style.transform =
+    `translateX(-50%) rotate(${s*6}deg)`;
+}
+
+setInterval(tickClock,1000);
+tickClock();
+
+function trackWA(){
+  db.ref("whatsapp/"+key).transaction(v=>(v||0)+1);
+}
 </script>
 
 </body>
