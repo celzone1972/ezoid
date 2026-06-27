@@ -272,26 +272,37 @@ db.ref("whatsapp/"+key).on("value", s=>{
 
 db.ref("visitors/"+key).transaction(v=>(v||0)+1);
 
-/* CLOCK TICK MODE */
+/* CLOCK SUPER PRESISI (SYNC HP) */
 function tickClock(){
   const now = new Date();
 
-  const s = now.getSeconds();
-  const m = now.getMinutes();
-  const h = now.getHours() % 12;
+  const ms = now.getMilliseconds();
+  const s = now.getSeconds() + ms/1000;
+  const m = now.getMinutes() + s/60;
+  const h = (now.getHours()%12) + m/60;
 
   document.getElementById("hour").style.transform =
-    `translateX(-50%) rotate(${(h + m/60)*30}deg)`;
+    `translateX(-50%) rotate(${h*30}deg)`;
 
   document.getElementById("minute").style.transform =
-    `translateX(-50%) rotate(${(m + s/60)*6}deg)`;
+    `translateX(-50%) rotate(${m*6}deg)`;
 
   document.getElementById("second").style.transform =
-    `translateX(-50%) rotate(${s*6}deg)`;
+    `translateX(-50%) rotate(${Math.floor(s)*6}deg)`;
 }
 
-setInterval(tickClock,1000);
-tickClock();
+/* ANTI DRIFT SYNC */
+function startClock(){
+  function loop(){
+    tickClock();
+    const now = new Date();
+    const delay = 1000 - now.getMilliseconds();
+    setTimeout(loop, delay);
+  }
+  loop();
+}
+
+startClock();
 
 function trackWA(){
   db.ref("whatsapp/"+key).transaction(v=>(v||0)+1);
