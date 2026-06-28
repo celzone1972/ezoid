@@ -6,28 +6,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EZOID</title>
 
-<!-- SEO BASIC -->
 <meta name="description" content="EZOID - Privat Bahasa Inggris cepat, mudah, dan fokus speaking untuk kerja, akademik, dan bisnis.">
 <meta name="keywords" content="privat bahasa inggris, kursus bahasa inggris, belajar speaking, ezoid, english course indonesia">
 <meta name="author" content="EZOID">
 <meta name="robots" content="index, follow">
 
-<!-- CANONICAL -->
 <link rel="canonical" href="https://ezoid.vercel.app/">
 
-<!-- OPEN GRAPH -->
 <meta property="og:title" content="EZOID - Privat Bahasa Inggris">
 <meta property="og:description" content="Belajar Bahasa Inggris cepat & praktis untuk kerja, akademik, dan bisnis.">
 <meta property="og:url" content="https://ezoid.vercel.app/">
-<meta property="og:type" content="website">
 
-<!-- TWITTER -->
-<meta name="twitter:card" content="summary_large_image">
-
-<!-- THEME -->
 <meta name="theme-color" content="#1e88e5">
 
-<!-- GOOGLE VERIFICATION -->
 <meta name="google-site-verification" content="OwspWn6Wa6h7cf8x7PRQ6uGemFvr8JyqvcIoGF023">
 
 <link rel="icon" href="data:image/svg+xml,
@@ -38,36 +29,113 @@
 
 <style>
 body{margin:0;font-family:Arial;background:#f4f8ff}
-header{background:linear-gradient(135deg,#1e88e5,#42a5f5);color:white;text-align:center;padding:20px}
+
+header{
+  background:linear-gradient(135deg,#1e88e5,#42a5f5);
+  color:white;
+  text-align:center;
+  padding:20px;
+}
 header h2{margin:0;font-size:34px}
 
-.header-counter{display:flex;justify-content:center;margin-top:-10px}
-.counter-box{background:#fff;padding:6px 14px;border-radius:20px;font-size:12px;box-shadow:0 2px 6px rgba(0,0,0,0.15)}
-.online-dot{width:10px;height:10px;background:#00cc00;border-radius:50%;display:inline-block;margin-right:6px;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.header-counter{
+  display:flex;
+  justify-content:center;
+  margin-top:-10px;
+}
+.counter-box{
+  background:#fff;
+  padding:6px 14px;
+  border-radius:20px;
+  font-size:12px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.15);
+}
 
-.hero{text-align:center;padding:40px 20px}
-.btn{background:#25D366;color:white;padding:10px 16px;border-radius:8px;text-decoration:none}
+.online-dot{
+  width:10px;height:10px;
+  background:#00cc00;
+  border-radius:50%;
+  display:inline-block;
+  margin-right:6px;
+  animation:blink 2s infinite;
+}
 
-.service-clock{display:flex;flex-direction:column;align-items:center;margin-top:20px}
-.clock{width:160px;height:160px;border-radius:50%;position:relative;background:radial-gradient(circle at 30% 30%, #fff6d1, #f5d77a 40%, #d4af37 100%);border:6px solid #d4af37;box-shadow:0 10px 25px rgba(0,0,0,0.15), inset 0 0 10px rgba(255,255,255,0.6)}
+@keyframes blink{
+  0%,100%{opacity:1}
+  50%{opacity:0.3}
+}
 
-.marker{position:absolute;width:2px;height:10px;background:#8a6b00;top:10px;left:50%;transform-origin:center 70px}
-.marker.long{height:14px;width:3px}
+.hero{
+  text-align:center;
+  padding:40px 20px;
+}
 
-.brand{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:11px;font-weight:bold;color:#6b5200}
+.btn{
+  background:#25D366;
+  color:white;
+  padding:10px 16px;
+  border-radius:8px;
+  text-decoration:none;
+}
 
-.hand{position:absolute;left:50%;bottom:50%;transform-origin:bottom center;background:#333;border-radius:2px}
-.hour{width:5px;height:40px;margin-left:-2.5px}
-.minute{width:3px;height:55px;margin-left:-1.5px}
-.second{width:2px;height:65px;background:#1e88e5;margin-left:-1px}
+.service-clock{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-top:20px;
+}
 
-.centerdot{position:absolute;left:50%;top:50%;width:10px;height:10px;background:#1e88e5;border-radius:50%;transform:translate(-50%,-50%)}
+.service-status{
+  width:220px;
+  padding:14px 0;
+  margin-top:10px;
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+  color:#fff;
+  border-radius:12px;
+  animation:blinkStatus 2s infinite;
+  box-shadow:0 4px 10px rgba(0,0,0,.18);
+  user-select:none;
+}
 
-.section{text-align:center;padding:20px}
-.card{background:#fff;margin:10px auto;padding:15px;border-radius:12px;max-width:600px;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.service-status.open{
+  background:linear-gradient(135deg,#1e88e5,#42a5f5);
+}
 
-.wa{position:fixed;bottom:20px;right:20px;background:#25D366;color:white;padding:10px;border-radius:50px;text-decoration:none}
+.service-status.closed{
+  background:linear-gradient(135deg,#d32f2f,#ef5350);
+}
+
+@keyframes blinkStatus{
+  0%,100%{opacity:1}
+  50%{opacity:0.5}
+}
+
+.section{
+  text-align:center;
+  padding:20px;
+}
+
+.card{
+  background:#fff;
+  margin:10px auto;
+  padding:15px;
+  border-radius:12px;
+  max-width:600px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+}
+
+.wa{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:white;
+  padding:10px;
+  border-radius:50px;
+  text-decoration:none;
+}
 </style>
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -83,7 +151,6 @@ header h2{margin:0;font-size:34px}
 
 <div class="header-counter">
   <div class="counter-box">
-    <span class="online-dot"></span>
     Visitor Today: <span id="visitor-count">0</span> | WA Today: <span id="wa-count">0</span>
   </div>
 </div>
@@ -95,33 +162,13 @@ header h2{margin:0;font-size:34px}
 </div>
 
 <div class="service-clock">
-  <div class="clock">
-
-    <div class="marker long" style="transform:rotate(0deg)"></div>
-    <div class="marker" style="transform:rotate(30deg)"></div>
-    <div class="marker" style="transform:rotate(60deg)"></div>
-    <div class="marker" style="transform:rotate(90deg)"></div>
-    <div class="marker" style="transform:rotate(120deg)"></div>
-    <div class="marker" style="transform:rotate(150deg)"></div>
-    <div class="marker" style="transform:rotate(180deg)"></div>
-    <div class="marker" style="transform:rotate(210deg)"></div>
-    <div class="marker" style="transform:rotate(240deg)"></div>
-    <div class="marker" style="transform:rotate(270deg)"></div>
-    <div class="marker" style="transform:rotate(300deg)"></div>
-    <div class="marker" style="transform:rotate(330deg)"></div>
-
-    <div class="brand">EZOID</div>
-
-    <div class="hand hour" id="hour"></div>
-    <div class="hand minute" id="minute"></div>
-    <div class="hand second" id="second"></div>
-    <div class="centerdot"></div>
-
-  </div>
-
-  <p style="text-align:center;font-weight:bold;color:#1e88e5;margin-top:10px">
-    Jam Layanan: 09.00–21.00 WIB
+  <p style="font-weight:bold;color:#1e88e5;margin-top:10px;text-align:center;">
+    Jam Layanan: 08.00–21.00 WIB
   </p>
+
+  <div id="serviceStatus" class="service-status">
+    BUKA
+  </div>
 </div>
 
 <section class="section">
@@ -172,7 +219,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-/* FIX WIB DATE STABLE */
 function getWIBDateKey(){
   const now = new Date();
   const utc = now.getTime() + now.getTimezoneOffset()*60000;
@@ -201,20 +247,23 @@ function trackWA(){
   db.ref("whatsapp/"+key).transaction(v=>(v||0)+1);
 }
 
-/* CLOCK */
-function tickClock(){
+/* SERVICE STATUS */
+function updateServiceStatus(){
   const now = new Date();
-  const ms = now.getMilliseconds();
-  const s = now.getSeconds() + ms/1000;
-  const m = now.getMinutes() + s/60;
-  const h = (now.getHours()%12) + m/60;
+  const hour = now.getHours();
+  const status = document.getElementById("serviceStatus");
 
-  document.getElementById("hour").style.transform = `translateX(-50%) rotate(${h*30}deg)`;
-  document.getElementById("minute").style.transform = `translateX(-50%) rotate(${m*6}deg)`;
-  document.getElementById("second").style.transform = `translateX(-50%) rotate(${Math.floor(s)*6}deg)`;
+  if(hour >= 8 && hour < 21){
+    status.textContent = "BUKA";
+    status.className = "service-status open";
+  }else{
+    status.textContent = "TUTUP";
+    status.className = "service-status closed";
+  }
 }
 
-setInterval(tickClock, 1000);
+updateServiceStatus();
+setInterval(updateServiceStatus,60000);
 </script>
 
 </body>
