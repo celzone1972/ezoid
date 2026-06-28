@@ -6,6 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EZOID</title>
 
+<meta name="description" content="EZOID - Privat Bahasa Inggris untuk kebutuhan sehari-hari, akademik, dan profesional. Belajar cepat, simpel, dan efektif." />
+
+<meta name="keywords" content="EZOID, privat bahasa inggris, kursus english, belajar bahasa inggris, speaking english" />
+
+<meta name="author" content="EZOID" />
+
 <link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
 <rect width='100' height='100' fill='%231e88e5'/>
@@ -240,6 +246,7 @@ header h2{margin:0;font-size:34px}
 <a class="wa" href="https://wa.me/6287770055999" onclick="trackWA()">WhatsApp</a>
 
 <script>
+/* (SEMUA JS TETAP AMAN - TIDAK DIUBAH) */
 const firebaseConfig = {
   apiKey: "AIzaSyAtWHWo_KZptjHYX1V2NDhQHb4zBpbXYyyA",
   authDomain: "ezoid-8328d.firebaseapp.com",
@@ -272,7 +279,6 @@ db.ref("whatsapp/"+key).on("value", s=>{
 
 db.ref("visitors/"+key).transaction(v=>(v||0)+1);
 
-/* CLOCK SUPER PRESISI (SYNC HP) */
 function tickClock(){
   const now = new Date();
 
@@ -291,7 +297,6 @@ function tickClock(){
     `translateX(-50%) rotate(${Math.floor(s)*6}deg)`;
 }
 
-/* ANTI DRIFT SYNC */
 function startClock(){
   function loop(){
     tickClock();
