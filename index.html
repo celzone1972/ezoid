@@ -88,6 +88,7 @@ header h2{margin:0;font-size:34px}
 
 .marker.long{height:14px;width:3px}
 
+/* FIX CENTER BRAND */
 .brand{
   position:absolute;
   top:50%;
@@ -97,6 +98,7 @@ header h2{margin:0;font-size:34px}
   font-weight:bold;
   color:#6b5200;
   letter-spacing:1px;
+  z-index:5;
 }
 
 .hand{
@@ -195,25 +197,21 @@ header h2{margin:0;font-size:34px}
     <div class="centerdot"></div>
 
   </div>
-
-  <p style="text-align:center;font-weight:bold;color:#1e88e5;margin-top:10px">
-    Jam Layanan: 09.00–21.00 WIB
-  </p>
 </div>
 
 <section class="section">
   <h2>Kenapa Memilih EZOID?</h2>
-  <div class="card">Belajar cepat & fokus speaking</div>
-  <div class="card">Metode simpel tanpa ribet</div>
-  <div class="card">Cocok kerja & bisnis</div>
+  <div class="card">Belajar cepat & fokus percakapan</div>
+  <div class="card">Metode sederhana tanpa teori yang rumit</div>
+  <div class="card">Cocok untuk kerja & bisnis</div>
   <div class="card">Fleksibel & jelas</div>
 </section>
 
 <section class="section">
   <h2>Program Belajar EZOID</h2>
   <div class="card">Dasar Percakapan</div>
-  <div class="card">Skill Development</div>
-  <div class="card">Professional English</div>
+  <div class="card">Pengembangan Keahlian</div>
+  <div class="card">Bahasa Inggris Profesional</div>
 </section>
 
 <section class="section">
@@ -225,16 +223,16 @@ header h2{margin:0;font-size:34px}
 
 <section class="section">
   <h2>Testimoni Siswa</h2>
-  <div class="card">"Lebih percaya diri." — Andi, Staff Kantor</div>
-  <div class="card">"Mudah dipahami." — Sinta, Fresh Graduate</div>
-  <div class="card">"Cocok kerja." — Budi, Job Seeker</div>
-  <div class="card">"Langsung praktik." — Rina, Karyawan</div>
-  <div class="card">"Bisa klien luar negeri." — Daniel, Freelancer</div>
-  <div class="card">"Lebih berani ngomong." — Fitri, Admin</div>
+  <div class="card">"Saya jadi lebih percaya diri kemunikasi dengan orang luar negeri ." — Andi, Staff Kantor</div>
+  <div class="card">"Materinya mudah dipahami." — Sinta, Fresh Graduate</div>
+  <div class="card">"Cocok untuk interview kerja." — Budi, Job Seeker</div>
+  <div class="card">"Langsung praktik berbicara." — Rina, Karyawan</div>
+  <div class="card">"Saya jadi bisa meeting dengan klien luar negeri." — Daniel, Freelancer</div>
+  <div class="card">"Lebih berani berbicara." — Fitri, Admin</div>
   <div class="card">"Fokus percakapan." — Agus, Mahasiswa</div>
-  <div class="card">"Siap kerja luar negeri." — Maria, Calon TKI</div>
-  <div class="card">"Penjelasan jelas." — Rudi, Supervisor</div>
-  <div class="card">"Cocok pemula." — Lestari, Ibu Rumah Tangga</div>
+  <div class="card">"Saya jadi siap kerja ke luar negeri." — Maria, Calon TKI</div>
+  <div class="card">"Penjelasannya sederhana." — Rudi, Supervisor</div>
+  <div class="card">"Cocok untuk pemula seperti saya." — Lestari, Ibu Rumah Tangga</div>
 </section>
 
 <a class="wa" href="https://wa.me/6287770055999" onclick="trackWA()">WhatsApp</a>
@@ -272,10 +270,8 @@ db.ref("whatsapp/"+key).on("value", s=>{
 
 db.ref("visitors/"+key).transaction(v=>(v||0)+1);
 
-/* CLOCK SUPER PRESISI (SYNC HP) */
 function tickClock(){
   const now = new Date();
-
   const ms = now.getMilliseconds();
   const s = now.getSeconds() + ms/1000;
   const m = now.getMinutes() + s/60;
@@ -288,21 +284,15 @@ function tickClock(){
     `translateX(-50%) rotate(${m*6}deg)`;
 
   document.getElementById("second").style.transform =
-    `translateX(-50%) rotate(${Math.floor(s)*6}deg)`;
+    `translateX(-50%) rotate(${s*6}deg)`;
 }
 
-/* ANTI DRIFT SYNC */
-function startClock(){
-  function loop(){
-    tickClock();
-    const now = new Date();
-    const delay = 1000 - now.getMilliseconds();
-    setTimeout(loop, delay);
-  }
-  loop();
+function loop(){
+  tickClock();
+  requestAnimationFrame(loop);
 }
 
-startClock();
+requestAnimationFrame(loop);
 
 function trackWA(){
   db.ref("whatsapp/"+key).transaction(v=>(v||0)+1);
