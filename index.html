@@ -163,7 +163,7 @@ header h2{margin:0;font-size:34px}
 
 <div class="service-clock">
   <p style="font-weight:bold;color:#1e88e5;margin-top:10px;text-align:center;">
-    Jam Layanan: 08.00–21.00 WIB
+    Jam Layanan: 09.00–21.00 WIB
   </p>
 
   <div id="serviceStatus" class="service-status">
@@ -253,7 +253,7 @@ function updateServiceStatus(){
   const hour = now.getHours();
   const status = document.getElementById("serviceStatus");
 
-  if(hour >= 8 && hour < 21){
+  if(hour >= 9 && hour < 21){
     status.textContent = "BUKA";
     status.className = "service-status open";
   }else{
