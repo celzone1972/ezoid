@@ -51,6 +51,37 @@ header h2{margin:0;font-size:34px}
   box-shadow:0 2px 6px rgba(0,0,0,0.15);
 }
 
+/* =========================
+   🔴 RUNNING TEXT FIX
+========================= */
+.running-text{
+  width:100%;
+  background:#c62828;
+  color:#fff;
+  overflow:hidden;
+  white-space:nowrap;
+  padding:10px 0;
+  display:none;
+}
+
+.running-text span{
+  display:inline-block;
+  white-space:nowrap;
+  padding-left:30%;
+  animation:marquee 18s linear infinite;
+  font-weight:bold;
+  font-size:15px;
+}
+
+.running-text:hover span{
+  animation-play-state:paused;
+}
+
+@keyframes marquee{
+  0%{transform:translateX(100%);}
+  100%{transform:translateX(-100%);}
+}
+
 .online-dot{
   width:10px;height:10px;
   background:#00cc00;
@@ -145,6 +176,13 @@ header h2{margin:0;font-size:34px}
 
 <body>
 
+<!-- 🔴 RUNNING TEXT (FIXED) -->
+<div id="runningText" class="running-text">
+  <span>
+    🔴 Saat ini layanan kami sedang TUTUP. Kami buka kembali pukul 09.00 WIB. Terima kasih atas kunjungan Anda. Sehat selalu dan tetap semangat.
+  </span>
+</div>
+
 <header>
   <h2>EZOID</h2>
 </header>
@@ -168,13 +206,12 @@ header h2{margin:0;font-size:34px}
     Jam Layanan: 09.00–21.00 WIB
   </p>
 
-  <div id="serviceStatus" class="service-status">
-    BUKA
-  </div>
+  <div id="serviceStatus" class="service-status">BUKA</div>
 </div>
 
 <section class="section">
   <h2>Kenapa Memilih EZOID?</h2>
+
   <div class="card">Pengajar Berpengalaman</div>
   <div class="card">Materi disesuaikan dengan kebutuhan</div>
   <div class="card">Metode belajar mudah dipahami</div>
@@ -184,6 +221,7 @@ header h2{margin:0;font-size:34px}
 
 <section class="section">
   <h2>Program Belajar EZOID</h2>
+
   <div class="card">Tata Bahasa (Grammar)</div>
   <div class="card">Membaca (Reading)</div>
   <div class="card">Menulis (Writing)</div>
@@ -197,6 +235,7 @@ header h2{margin:0;font-size:34px}
 
 <section class="section">
   <h2>Paket Belajar</h2>
+
   <div class="card">4 Jam - Rp 400.000</div>
   <div class="card">8 Jam - Rp 800.000</div>
   <div class="card">12 Jam - Rp 1.200.000</div>
@@ -252,6 +291,7 @@ header h2{margin:0;font-size:34px}
 </section>
 <section class="section">
   <h2>Testimoni Siswa</h2>
+
   <div class="card">"Saya jadi lebih percaya diri berbicara dalam Bahasa Inggris." - Andi, Manager</div>
   <div class="card">"Materinya mudah dipahami dan sesuai dengan kebutuhan kuliah." - Sinta, Mahasiswa</div>
   <div class="card">"Grammar saya jauh lebih baik." - Budi, Pencari Kerja</div>
@@ -323,8 +363,24 @@ function updateServiceStatus(){
   }
 }
 
+/* RUNNING TEXT CONTROL */
+function updateRunningText(){
+  const h = new Date().getHours();
+  const el = document.getElementById("runningText");
+
+  if(h >= 21 || h < 9){
+    el.style.display = "block";
+  } else {
+    el.style.display = "none";
+  }
+}
+
 updateServiceStatus();
-setInterval(updateServiceStatus,60000);
+updateRunningText();
+setInterval(()=>{
+  updateServiceStatus();
+  updateRunningText();
+},60000);
 </script>
 
 </body>
