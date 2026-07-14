@@ -348,6 +348,20 @@ function trackWA(){
   db.ref("whatsapp/"+key).transaction(v=>(v||0)+1);
 }
 
+
+/* TELEGRAM VISITOR ALERT */
+const lastAlert = localStorage.getItem("ezoidTelegramAlert");
+const nowAlert = Date.now();
+
+if(!lastAlert || (nowAlert - lastAlert) > 300000){
+
+  fetch("/api/visitor")
+  .then(()=> {
+    localStorage.setItem("ezoidTelegramAlert", nowAlert);
+  });
+
+}
+
 /* SERVICE STATUS */
 function updateServiceStatus(){
   const now = new Date();
