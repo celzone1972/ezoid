@@ -11,11 +11,52 @@ export default async function handler(req, res) {
     const geo = await fetch(`https://ipapi.co/${ip}/json/`);
     const data = await geo.json();
 
-    lokasi = `${data.city || "-"}, ${data.country_name || "-"}`;
+    if (data.city || data.country_name) {
+      lokasi = `${data.city || "-"}, ${data.country_name || "-"}`;
+    }
 
   } catch (e) {
-    lokasi = "Gagal mendapatkan lokasi";
+    lokasi = "Tidak diketahui";
   }
+
+
+  // DEVICE
+  const userAgent = req.headers["user-agent"] || "";
+
+  let device = "Tidak diketahui";
+
+  if (/android/i.test(userAgent)) {
+    device = "Android Mobile";
+  } 
+  else if (/iphone/i.test(userAgent)) {
+    device = "iPhone";
+  } 
+  else if (/ipad/i.test(userAgent)) {
+    device = "iPad";
+  } 
+  else if (/windows/i.test(userAgent)) {
+    device = "Windows Desktop";
+  } 
+  else if (/macintosh/i.test(userAgent)) {
+    device = "Mac Desktop";
+  }
+
+
+  // SUMBER TRAFFIC
+  const referer = req.headers["referer"] || "";
+
+  let sumber = "Direct";
+
+  if (referer.includes("facebook")) {
+    sumber = "Facebook";
+  } 
+  else if (referer.includes("google")) {
+    sumber = "Google";
+  } 
+  else if (referer.includes("whatsapp")) {
+    sumber = "WhatsApp";
+  }
+
 
   const now = new Date();
 
@@ -29,12 +70,17 @@ export default async function handler(req, res) {
     minute: "2-digit"
   });
 
+
   const message =
 `🚀 Pengunjung baru EZOID
 
 📅 Tanggal: ${tanggal}
 ⏰ Jam: ${jam} WIB
-📍 Lokasi: ${lokasi}`;
+📍 Lokasi: ${lokasi}
+
+📱 Device: ${device}
+🌐 Sumber: ${sumber}`;
+
 
   const url = `https://api.telegram.org/bot${token}/sendMessage`;
 
@@ -48,6 +94,7 @@ export default async function handler(req, res) {
       text: message
     })
   });
+
 
   const result = await response.json();
 
