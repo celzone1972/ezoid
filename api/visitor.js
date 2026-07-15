@@ -7,17 +7,48 @@ export default async function handler(req, res) {
 
   let lokasi = "Tidak diketahui";
 
-  try {
-    const geo = await fetch(`https://ipapi.co/${ip}/json/`);
-    const data = await geo.json();
+try {
+  // Coba ipapi.co dulu
+  const geo1 = await fetch(`https://ipapi.co/${ip}/json/`);
+  const data1 = await geo1.json();
 
-    if (data.city || data.country_name) {
-      lokasi = `${data.city || "-"}, ${data.country_name || "-"}`;
+  if (data1.city || data1.country_name) {
+
+    lokasi =
+      `${data1.city || "-"}, ${data1.country_name || "-"}`;
+
+  } else {
+
+    throw new Error("ipapi gagal");
+
+  }
+
+} catch (e1) {
+
+  try {
+
+    // Fallback ke ip-api.com
+    const geo2 = await fetch(`http://ip-api.com/json/${ip}`);
+    const data2 = await geo2.json();
+
+    if (data2.status === "success") {
+
+      lokasi =
+        `${data2.city || "-"}, ${data2.country || "-"}`;
+
+    } else {
+
+      throw new Error("ip-api gagal");
+
     }
 
-  } catch (e) {
+  } catch (e2) {
+
     lokasi = "Tidak diketahui";
+
   }
+
+} 
 
 
   // DEVICE
