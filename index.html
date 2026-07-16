@@ -194,7 +194,7 @@ header h2{margin:0;font-size:34px}
   <p class="online-offline">Tersedia kelas Online/Offline</p>
   <p>Untuk pelajar, mahasiswa, dan umum</p>
   
-  <a class="btn" href="https://wa.me/6287770055999" onclick="trackWA()">Daftar WhatsApp</a>
+  <a class="btn" href="https://wa.me/6287770055999" onclick="return trackWA()">Daftar WhatsApp</a>
 </div>
 
 <div class="service-clock">
@@ -333,8 +333,16 @@ const key = getWIBDateKey();
 db.ref("visitors/"+key).transaction(v=>(v||0)+1);
 
 function trackWA(){
-}
 
+  fetch("/api/wa")
+  .then(()=>{
+    console.log("WA Today tercatat");
+  })
+  .catch(()=>{
+    console.log("Gagal mencatat WA");
+  });
+
+}
 /* TELEGRAM VISITOR ALERT */
 const lastAlert = localStorage.getItem("ezoidTelegramAlert");
 const nowAlert = Date.now();
