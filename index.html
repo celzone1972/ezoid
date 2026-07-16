@@ -187,11 +187,7 @@ header h2{margin:0;font-size:34px}
   <h2>EZOID</h2>
 </header>
 
-<div class="header-counter">
-  <div class="counter-box">
-    Visitor Today: <span id="visitor-count">0</span> | WA Today: <span id="wa-count">0</span>
-  </div>
-</div>
+
 
 <div class="hero">
   <h1>Privat Bahasa Inggris</h1>
@@ -334,20 +330,10 @@ function getWIBDateKey(){
 
 const key = getWIBDateKey();
 
-db.ref("visitors/"+key).on("value", s=>{
-  document.getElementById("visitor-count").innerText = s.val() ?? 0;
-});
-
-db.ref("whatsapp/"+key).on("value", s=>{
-  document.getElementById("wa-count").innerText = s.val() ?? 0;
-});
-
 db.ref("visitors/"+key).transaction(v=>(v||0)+1);
 
 function trackWA(){
-  db.ref("whatsapp/"+key).transaction(v=>(v||0)+1);
 }
-
 
 /* TELEGRAM VISITOR ALERT */
 const lastAlert = localStorage.getItem("ezoidTelegramAlert");
