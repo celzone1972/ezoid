@@ -12,12 +12,12 @@ try {
   const geo1 = await fetch(`https://ipapi.co/${ip}/json/`);
   const data1 = await geo1.json();
 
-  if (data1.city || data1.country_name) {
+  if (data1.city || data1.region || data1.country_name) {
 
     lokasi =
-      `${data1.city || "-"}, ${data1.country_name || "-"}`;
+      `${data1.city || "-"}, ${data1.region || "-"}, ${data1.country_name || "-"}`;
 
-  } else {
+} else {
 
     throw new Error("ipapi gagal");
 
@@ -34,7 +34,7 @@ try {
     if (data2.status === "success") {
 
       lokasi =
-        `${data2.city || "-"}, ${data2.country || "-"}`;
+        `${data2.city || "-"}, ${data2.regionName || "-"}, ${data2.country || "-"}`;
 
     } else {
 
