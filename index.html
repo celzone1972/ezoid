@@ -4,22 +4,26 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EZOID</title>
 
-<meta name="description" content="EZOID - Privat Bahasa Inggris cepat, mudah, dan fokus speaking untuk kerja, akademik, dan bisnis.">
-<meta name="keywords" content="privat bahasa inggris, kursus bahasa inggris, belajar speaking, ezoid, english course indonesia">
+<title>EZOID - Privat Bahasa Inggris Profesional</title>
+
+<meta name="description" content="EZOID menyediakan Privat Bahasa Inggris untuk Pelajar, Mahasiswa, dan Umum. Belajar Grammar, Speaking, Reading, Writing, Listening, dan Business English.">
+
+<meta name="keywords" content="privat bahasa inggris, kursus bahasa inggris, belajar bahasa inggris, ezoid, english course indonesia">
+
 <meta name="author" content="EZOID">
 <meta name="robots" content="index, follow">
 
 <link rel="canonical" href="https://ezoid.vercel.app/">
 
 <meta property="og:title" content="EZOID - Privat Bahasa Inggris">
-<meta property="og:description" content="Belajar Bahasa Inggris cepat & praktis untuk kerja, akademik, dan bisnis.">
+<meta property="og:description" content="Belajar Bahasa Inggris sesuai kebutuhan untuk Pelajar, Mahasiswa, dan Umum.">
 <meta property="og:url" content="https://ezoid.vercel.app/">
 
 <meta name="theme-color" content="#1e88e5">
 
 <meta name="google-site-verification" content="OwspWn6Wa6h7cf8x7PRQ6uGemFvr8JyqvcIoGF023">
+
 
 <link rel="icon" href="data:image/svg+xml,
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
@@ -27,369 +31,644 @@
 <text x='50' y='72' font-size='75' font-weight='900' text-anchor='middle' fill='white'>E</text>
 </svg>">
 
+
 <style>
-body{margin:0;font-family:Arial;background:#f4f8ff}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
+
+
+body{
+background:#ffffff;
+color:#1f2937;
+}
+
+
+/* HEADER */
 
 header{
-  background:linear-gradient(135deg,#1e88e5,#42a5f5);
-  color:white;
-  text-align:center;
-  padding:20px;
-}
-header h2{margin:0;font-size:34px}
 
-.header-counter{
-  display:flex;
-  justify-content:center;
-  margin-top:-10px;
-}
-.counter-box{
-  background:#fff;
-  padding:6px 14px;
-  border-radius:20px;
-  font-size:12px;
-  box-shadow:0 2px 6px rgba(0,0,0,0.15);
+background:white;
+padding:25px 20px;
+text-align:center;
+border-bottom:1px solid #eee;
+
 }
 
-/* =========================
-   🔴 RUNNING TEXT FIX
-========================= */
-.running-text{
-  width:100%;
-  background:#c62828;
-  color:#fff;
-  overflow:hidden;
-  white-space:nowrap;
-  padding:10px 0;
-  display:none;
+
+.logo{
+
+font-size:48px;
+font-weight:900;
+letter-spacing:2px;
+color:#1e88e5;
+
 }
 
-.running-text span{
-  display:inline-block;
-  white-space:nowrap;
-  padding-left:30%;
-  animation:marquee 18s linear infinite;
-  font-weight:bold;
-  font-size:15px;
-}
 
-.running-text:hover span{
-  animation-play-state:paused;
-}
-
-@keyframes marquee{
-  0%{transform:translateX(100%);}
-  100%{transform:translateX(-100%);}
-}
-
-.online-dot{
-  width:10px;height:10px;
-  background:#00cc00;
-  border-radius:50%;
-  display:inline-block;
-  margin-right:6px;
-  animation:blink 2s infinite;
-}
-
-@keyframes blink{
-  0%,100%{opacity:1}
-  50%{opacity:0.3}
-}
+/* HERO */
 
 .hero{
-  text-align:center;
-  padding:40px 20px;
+
+text-align:center;
+padding:60px 20px;
+
 }
+
+
+.hero h1{
+
+font-size:40px;
+color:#111827;
+margin-bottom:15px;
+
+}
+
+
+.hero span{
+
+color:#1e88e5;
+
+}
+
+
+.hero p{
+
+font-size:18px;
+line-height:1.7;
+max-width:650px;
+margin:10px auto;
+
+}
+
+
+/* BUTTON */
 
 .btn{
-  background:#25D366;
-  color:white;
-  padding:10px 16px;
-  border-radius:8px;
-  text-decoration:none;
+
+display:inline-block;
+margin-top:20px;
+background:#25D366;
+color:white;
+padding:14px 25px;
+border-radius:30px;
+text-decoration:none;
+font-weight:bold;
+
 }
 
-.service-clock{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  margin-top:20px;
-}
 
-.service-status{
-  width:220px;
-  padding:14px 0;
-  margin-top:10px;
-  text-align:center;
-  font-size:22px;
-  font-weight:bold;
-  color:#fff;
-  border-radius:12px;
-  animation:blinkStatus 2s infinite;
-  box-shadow:0 4px 10px rgba(0,0,0,.18);
-  user-select:none;
-}
-
-.service-status.open{
-  background:linear-gradient(135deg,#1e88e5,#42a5f5);
-}
-
-.service-status.closed{
-  background:linear-gradient(135deg,#d32f2f,#ef5350);
-}
-
-@keyframes blinkStatus{
-  0%,100%{opacity:1}
-  50%{opacity:0.5}
-}
+/* SECTION */
 
 .section{
-  text-align:center;
-  padding:20px;
+
+padding:50px 20px;
+text-align:center;
+
 }
+
+
+.section h2{
+
+font-size:30px;
+margin-bottom:30px;
+color:#111827;
+
+}
+
+
+/* CARD */
+
+.cards{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:20px;
+max-width:1000px;
+margin:auto;
+
+}
+
 
 .card{
-  background:#fff;
-  margin:10px auto;
-  padding:15px;
-  border-radius:12px;
-  max-width:600px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.08);
+
+background:#ffffff;
+border:1px solid #e5e7eb;
+padding:25px;
+border-radius:18px;
+box-shadow:0 5px 20px rgba(0,0,0,.05);
+
 }
 
-.wa{
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25D366;
-  color:white;
-  padding:10px;
-  border-radius:50px;
-  text-decoration:none;
+
+.card h3{
+
+color:#1e88e5;
+margin-bottom:12px;
+
 }
+
+
+/* PACKAGE */
+
+.package{
+
+background:#ffffff;
+border:1px solid #e5e7eb;
+
+}
+
+
+/* FLOAT WA */
+
+.wa{
+
+position:fixed;
+right:20px;
+bottom:20px;
+background:#25D366;
+color:white;
+padding:14px 22px;
+border-radius:50px;
+text-decoration:none;
+font-weight:bold;
+z-index:99;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+.logo{
+font-size:38px;
+}
+
+.hero h1{
+font-size:30px;
+}
+
+}
+
 </style>
+
 
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
+
 </head>
+
 
 <body>
 
-<!-- 🔴 RUNNING TEXT (FIXED) -->
-<div id="runningText" class="running-text">
-  <span>
-    🔴 Saat ini layanan kami sedang TUTUP. Kami buka kembali pukul 09.00 WIB. Terima kasih atas kunjungan Anda. Sehat selalu dan tetap semangat.
-  </span>
-</div>
 
 <header>
-  <h2>EZOID</h2>
+
+<div class="logo">
+EZOID
+</div>
+
 </header>
 
 
 
-<div class="hero">
-  <h1>Privat Bahasa Inggris</h1>
-  <p class="online-offline">Tersedia kelas Online/Offline</p>
-  <p>Untuk pelajar, mahasiswa, dan umum</p>
-  
-  <a class="btn" href="https://wa.me/6287770055999" onclick="return trackWA()">Daftar WhatsApp</a>
+<section class="hero">
+
+
+<h1>
+Privat Bahasa Inggris
+<br>
+<span>Untuk Semua Kebutuhan</span>
+</h1>
+
+
+<p>
+Belajar Bahasa Inggris untuk Pelajar, Mahasiswa, dan Umum.
+Materi disesuaikan dengan level dan kebutuhan Anda.
+</p>
+
+
+<a class="btn" href="https://wa.me/6287770055999" onclick="return trackWA()">
+Konsultasi & Pendaftaran via WhatsApp
+</a>
+
+
+</section>
+
+
+<section class="section">
+
+<h2>Kenapa Memilih EZOID?</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Pengajar Berpengalaman</h3>
+<p>
+Belajar bersama tutor dengan pengalaman mengajar Bahasa Inggris.
+</p>
 </div>
 
-<div class="service-clock">
-  <p style="font-weight:bold;color:#1e88e5;margin-top:10px;text-align:center;">
-    Jam Layanan: 09.00–21.00 WIB
-  </p>
 
-  <div id="serviceStatus" class="service-status">BUKA</div>
+<div class="card">
+<h3>Materi Sesuai Kebutuhan</h3>
+<p>
+Materi disesuaikan dengan level dan tujuan belajar Anda.
+</p>
 </div>
 
-<section class="section">
-  <h2>Kenapa Memilih EZOID?</h2>
 
-  <div class="card">Pengajar Berpengalaman</div>
-  <div class="card">Materi disesuaikan dengan kebutuhan</div>
-  <div class="card">Metode belajar mudah dipahami</div>
-  <div class="card">Cocok untuk pelajar, mahasiswa dan profesional</div>
-  <div class="card">Fleksibel & jelas</div>
+<div class="card">
+<h3>Metode Mudah Dipahami</h3>
+<p>
+Pembelajaran praktis dan fokus pada perkembangan kemampuan.
+</p>
+</div>
+
+
+<div class="card">
+<h3>Fleksibel</h3>
+<p>
+Pilihan belajar privat maupun online sesuai jadwal Anda.
+</p>
+</div>
+
+
+</div>
+
 </section>
 
-<section class="section">
-  <h2>Program Belajar EZOID</h2>
 
-  <div class="card">Tata Bahasa (Grammar)</div>
-  <div class="card">Membaca (Reading)</div>
-  <div class="card">Menulis (Writing)</div>
-  <div class="card">Mendengarkan (Listening)</div>
-  <div class="card">Berbicara (Speaking)</div>
-  <div class="card">Kosakata (Vocabulary)</div>
-  <div class="card">Percakapan Sehari-hari</div>
-  <div class="card">Bahasa Inggris Bisnis</div>
-  <div class="card">Bahasa Inggris Akademik</div>
-</section>
 
 <section class="section">
-  <h2>Paket Belajar</h2>
 
-  <div class="card">4 Jam - Rp 400.000</div>
-  <div class="card">8 Jam - Rp 800.000</div>
-  <div class="card">12 Jam - Rp 1.200.000</div>
+<h2>Program Belajar EZOID</h2>
+
+
+<div class="cards">
+
+
+<div class="card">
+
+<h3>Private Class</h3>
+
+<p>
+Belajar Bahasa Inggris secara privat sesuai kebutuhan dan level Anda.
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Online Class</h3>
+
+<p>
+Belajar fleksibel dari mana saja dengan materi yang disesuaikan.
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>General English</h3>
+
+<p>
+Grammar, Speaking, Reading, Writing, Listening, dan percakapan sehari-hari.
+</p>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Business English</h3>
+
+<p>
+Meeting, Presentation, Email, dan Interview untuk kebutuhan profesional.
+</p>
+
+</div>
+
+
+</div>
+
 </section>
+
+
+
+
+
 <section class="section">
-  <h2>❓ Pertanyaan yang Sering Diajukan (FAQ)</h2>
 
-  <div class="card" style="text-align:left;">
+<h2>Paket Belajar</h2>
 
-    <h3>1. EZOID itu apa?</h3>
-    <p>EZOID adalah layanan privat Bahasa Inggris untuk pelajar, mahasiswa, dan umum dengan metode pembelajaran yang fleksibel dan disesuaikan dengan kebutuhan.</p>
 
-    <h3>2. Materinya apa saja?</h3>
-    <p>Materi mencakup grammar, speaking, reading, writing, komunikasi Bahasa Inggris, tugas sekolah/kuliah, dan persiapan kerja.</p>
+<div class="cards">
 
-    <h3>3. Belajarnya online atau offline?</h3>
-    <p>Bisa online maupun offline (sesuai lokasi dan kesepakatan).</p>
 
-    <h3>4. Berapa biaya privat?</h3>
-    <p>Biaya disesuaikan dengan paket belajar berdasarkan total jam.</p>
+<div class="card package">
 
-    <h3>5. Berapa lama durasi setiap pertemuan?</h3>
-    <p>Durasi fleksibel sesuai kesepakatan. Contoh: 4 jam bisa 4x1 jam atau 2x2 jam.</p>
+<h3>Basic</h3>
 
-    <h3>6. Jadwal belajarnya bagaimana?</h3>
-    <p>Jadwal fleksibel dan disesuaikan dengan waktu yang tersedia.</p>
+<p>
+4 Jam
+</p>
 
-    <h3>7. Cocok untuk pemula?</h3>
-    <p>Ya, cocok untuk semua level dari dasar sampai lanjutan.</p>
+<h2>
+Rp400.000
+</h2>
 
-    <h3>8. Bagaimana cara mendaftar?</h3>
-    <p style="text-align:center;">
-      Silakan <b style="color:#25D366; font-size:18px;">👉 KLIK TOMBOL WHATSAPP 👈</b><br>
-      untuk mendapatkan informasi dan pendaftaran.
-    </p>
+</div>
 
-  </div>
 
-  <!-- CTA -->
-  <div style="margin-top:20px; text-align:center; padding:18px; border:2px solid #25D366; border-radius:12px;">
 
-    <strong>📲 Siap mulai belajar Bahasa Inggris?</strong><br><br>
+<div class="card package">
 
-    <p style="font-style:italic; color:#444; margin:8px 0;">
-      "Jangan tunda sampai besok apa yang dapat Anda lakukan hari ini."
-    </p>
+<h3>Regular</h3>
 
-    <span style="font-weight:bold; font-size:18px; color:#25D366;">
-      KLIK TOMBOL WHATSAPP UNTUK MULAI BELAJAR
-    </span>
+<p>
+8 Jam
+</p>
 
-  </div>
+<h2>
+Rp800.000
+</h2>
+
+</div>
+
+
+
+<div class="card package">
+
+<h3>Intensive</h3>
+
+<p>
+12 Jam
+</p>
+
+<h2>
+Rp1.200.000
+</h2>
+
+</div>
+
+
+</div>
+
 </section>
+
+
+
+
+
 <section class="section">
-  <h2>Testimoni Siswa</h2>
 
-  <div class="card">"Saya jadi lebih percaya diri berbicara dalam Bahasa Inggris." - Andi, Manager</div>
-  <div class="card">"Materinya mudah dipahami dan sesuai dengan kebutuhan kuliah." - Sinta, Mahasiswa</div>
-  <div class="card">"Grammar saya jauh lebih baik." - Budi, Pencari Kerja</div>
-  <div class="card">"Belajarnya santai tapi hasilnya terasa." - Rina, Karyawan</div>
-  <div class="card">"Sekarang lebih percaya diri saat meeting dengan klien luar negeri." - Daniel, Freelancer</div>
-  <div class="card">"Vocabulary saya semakin bertambah." - Fitri, Admin</div>
-  <div class="card">"Penjelasannya jelas dan mudah diikuti." - Rudy, Marketing Dept</div>
-  <div class="card">"Membantu saya mempersiapkan tes dan wawancara kerja." - Maria, Calon TKI</div>
-  <div class="card">"Belajar sesuai target yang saya inginkan." - Stephen, HRD</div>
-  <div class="card">"Materinya bermanfaat untuk kebutuhan bisnis." - John, Pengusaha</div>
+<h2>FAQ</h2>
+
+
+<div class="card" style="text-align:left;">
+
+
+<h3>1. EZOID untuk siapa?</h3>
+
+<p>
+EZOID untuk Pelajar, Mahasiswa, dan Umum yang ingin meningkatkan kemampuan Bahasa Inggris.
+</p>
+
+
+<h3>2. Materi apa saja yang dipelajari?</h3>
+
+<p>
+Grammar, Speaking, Reading, Writing, Listening, Vocabulary, dan Conversation.
+</p>
+
+
+<h3>3. Apakah tersedia kelas online?</h3>
+
+<p>
+Ya, tersedia kelas online dan privat sesuai kebutuhan.
+</p>
+
+
+<h3>4. Apakah cocok untuk pemula?</h3>
+
+<p>
+Ya, pembelajaran dapat dimulai dari level dasar sampai lanjutan.
+</p>
+
+
+<h3>5. Bagaimana cara mendaftar?</h3>
+
+<p style="text-align:center;font-weight:bold;color:#25D366;">
+Klik tombol WhatsApp untuk konsultasi dan pendaftaran.
+</p>
+
+
+</div>
+
+
 </section>
 
-<a class="wa" href="https://wa.me/6287770055999" onclick="trackWA()">WhatsApp</a>
+
+
+
+
+<section class="section">
+
+<h2>Testimoni Siswa</h2>
+
+
+<div class="cards">
+
+
+<div class="card">
+"Belajar jadi lebih percaya diri menggunakan Bahasa Inggris."
+</div>
+
+
+<div class="card">
+"Materinya mudah dipahami dan sesuai kebutuhan."
+</div>
+
+
+<div class="card">
+"Metodenya santai tapi kemampuan meningkat."
+</div>
+
+
+<div class="card">
+"Sangat membantu untuk belajar komunikasi Bahasa Inggris."
+</div>
+
+
+</div>
+
+
+</section>
+
+
+<a class="wa" 
+href="https://wa.me/6287770055999" 
+onclick="trackWA()">
+WhatsApp
+</a>
+
+
 
 <script>
+
+
+/* FIREBASE */
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAtWHWo_KZptjHYX1V2NDhQHb4zBpbXYyyA",
-  authDomain: "ezoid-8328d.firebaseapp.com",
-  databaseURL: "https://ezoid-8328d-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "ezoid-8328d",
-  storageBucket: "ezoid-8328d.firebasestorage.app",
-  messagingSenderId: "889301644842",
-  appId: "1:889301644842:web:c86467b84db01d904c7553"
+
+apiKey: "AIzaSyAtWHWo_KZptjHYX1V2NDhQHb4zBpbXYyyA",
+
+authDomain: "ezoid-8328d.firebaseapp.com",
+
+databaseURL: "https://ezoid-8328d-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+projectId: "ezoid-8328d",
+
+storageBucket: "ezoid-8328d.firebasestorage.app",
+
+messagingSenderId: "889301644842",
+
+appId: "1:889301644842:web:c86467b84db01d904c7553"
+
 };
 
+
 firebase.initializeApp(firebaseConfig);
+
 const db = firebase.database();
 
+
+
 function getWIBDateKey(){
-  const now = new Date();
-  const utc = now.getTime() + now.getTimezoneOffset()*60000;
-  const wib = new Date(utc + 7*60*60000);
 
-  const y = wib.getFullYear();
-  const m = String(wib.getMonth()+1).padStart(2,'0');
-  const d = String(wib.getDate()).padStart(2,'0');
+const now = new Date();
 
-  return `${y}-${m}-${d}`;
+const utc = now.getTime() + now.getTimezoneOffset()*60000;
+
+const wib = new Date(utc + 7*60*60000);
+
+
+const y = wib.getFullYear();
+
+const m = String(wib.getMonth()+1).padStart(2,'0');
+
+const d = String(wib.getDate()).padStart(2,'0');
+
+
+return `${y}-${m}-${d}`;
+
 }
+
+
 
 const key = getWIBDateKey();
 
-db.ref("visitors/"+key).transaction(v=>(v||0)+1);
+
+db.ref("visitors/"+key)
+.transaction(v => (v || 0)+1);
+
+
+
+
+
+/* WHATSAPP TRACKING */
+
 
 function trackWA(){
 
-  fetch("/api/wa")
-  .then(()=>{
-    console.log("WA Today tercatat");
-  })
-  .catch(()=>{
-    console.log("Gagal mencatat WA");
-  });
+
+fetch("/api/wa")
+
+.then(()=>{
+
+console.log("WA tercatat");
+
+})
+
+.catch(()=>{
+
+console.log("Gagal mencatat WA");
+
+});
+
 
 }
+
+
+
+
+
 /* TELEGRAM VISITOR ALERT */
+
+
 const lastAlert = localStorage.getItem("ezoidTelegramAlert");
+
 const nowAlert = Date.now();
 
-if(!lastAlert || (nowAlert - lastAlert) > 300000){
 
-  fetch("/api/visitor")
-  .then(()=> {
-    localStorage.setItem("ezoidTelegramAlert", nowAlert);
-  });
+
+if(!lastAlert || (nowAlert-lastAlert)>300000){
+
+
+fetch("/api/visitor")
+
+.then(()=>{
+
+
+localStorage.setItem(
+"ezoidTelegramAlert",
+nowAlert
+);
+
+
+});
+
 
 }
 
-/* SERVICE STATUS */
-function updateServiceStatus(){
-  const now = new Date();
-  const hour = now.getHours();
-  const status = document.getElementById("serviceStatus");
 
-  if(hour >= 9 && hour < 21){
-    status.textContent = "BUKA";
-    status.className = "service-status open";
-  }else{
-    status.textContent = "TUTUP";
-    status.className = "service-status closed";
-  }
-}
 
-/* RUNNING TEXT CONTROL */
-function updateRunningText(){
-  const h = new Date().getHours();
-  const el = document.getElementById("runningText");
 
-  if(h >= 21 || h < 9){
-    el.style.display = "block";
-  } else {
-    el.style.display = "none";
-  }
-}
-
-updateServiceStatus();
-updateRunningText();
-setInterval(()=>{
-  updateServiceStatus();
-  updateRunningText();
-},60000);
 </script>
 
+
+
+<footer style="
+background:#111827;
+color:white;
+text-align:center;
+padding:35px;
+margin-top:40px;
+">
+
+
+<h3>EZOID</h3>
+
+<p>
+Privat Bahasa Inggris untuk Pelajar, Mahasiswa, dan Umum
+</p>
+
+
+</footer>
+
+
 </body>
+
 </html>
