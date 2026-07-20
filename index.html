@@ -369,7 +369,7 @@ Meeting, Presentation, Email, dan Interview untuk kebutuhan profesional.
 
 
 
-<section class="section">
+<section class="section" id="harga">
 
 <h2>Paket Belajar</h2>
 
@@ -643,7 +643,40 @@ nowAlert
 
 }
 
+/* TRACK HARGA DILIHAT */
 
+let hargaTerkirim = false;
+
+const hargaSection = document.querySelector("#harga");
+
+const hargaObserver = new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting && !hargaTerkirim){
+
+hargaTerkirim = true;
+
+fetch("/api/harga")
+.then(()=>{
+console.log("Harga dilihat");
+})
+.catch(()=>{
+console.log("Gagal mencatat harga");
+});
+
+}
+
+});
+
+},{
+threshold:0.5
+});
+
+
+if(hargaSection){
+hargaObserver.observe(hargaSection);
+}
 
 
 </script>
