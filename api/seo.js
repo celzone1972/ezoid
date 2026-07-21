@@ -53,6 +53,19 @@ endDate: endDate,
 
     const row = response.data.rows ? response.data.rows[0] : null;
 
+    const report = `
+📊 SEO EZOID REPORT
+
+📅 Periode: ${startDate} sampai ${endDate}
+
+👆 Klik: ${row ? row.clicks : 0}
+
+👀 Tayangan: ${row ? row.impressions : 0}
+
+📈 CTR: ${row ? (row.ctr * 100).toFixed(2) + "%" : "0%"}
+
+🏆 Posisi Rata-rata: ${row ? row.position.toFixed(1) : "0"}
+`;
 
     res.status(200).json({
 
