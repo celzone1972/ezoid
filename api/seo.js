@@ -53,10 +53,17 @@ endDate: endDate,
 
     const row = response.data.rows ? response.data.rows[0] : null;
 
+    const formatTanggal = (tanggal) => {
+  return new Date(tanggal).toLocaleDateString("id-ID", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+};
     const report = `
 📊 SEO EZOID REPORT
 
-📅 Periode: ${startDate} sampai ${endDate}
+📅 Periode: ${formatTanggal(startDate)} sampai ${formatTanggal(endDate)}
 
 👆 Klik: ${row ? row.clicks : 0}
 
