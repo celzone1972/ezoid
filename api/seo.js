@@ -8,7 +8,6 @@ export default async function handler(req, res) {
       process.env.GOOGLE_SERVICE_ACCOUNT_JSON
     );
 
-
     const auth = new google.auth.GoogleAuth({
 
       credentials,
@@ -21,8 +20,10 @@ export default async function handler(req, res) {
 
 
     const searchconsole = google.searchconsole({
+
       version: "v1",
       auth
+
     });
 
 
@@ -47,11 +48,43 @@ export default async function handler(req, res) {
     });
 
 
+    const rows = response.data.rows || [];
+
+
+    const keywords = rows.map(item => ({
+
+      keyword: item.keys[0],
+
+      clicks: item.clicks,
+
+      impressions: item.impressions,
+
+      ctr: (item.ctr * 100).toFixed(2) + "%",
+
+      position: item.position.toFixed(1)
+
+    }));
+
+
     res.status(200).json({
 
       status: "SEO EZOID aktif",
 
-      data: response.data
+      period: "2026-07-01 sampai 2026-07-20",
+
+      total: {
+
+        clicks: response.data.rows
+          ? rows.reduce((a,b)=>a+b.clicks,0)
+          : 0,
+
+        impressions: response.data.rows
+          ? rows.reduce((a,b)=>a+b.impressions,0)
+          : 0
+
+      },
+
+      keywords
 
     });
 
