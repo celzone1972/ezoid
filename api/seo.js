@@ -26,6 +26,14 @@ export default async function handler(req, res) {
 
     });
 
+    const today = new Date();
+
+const endDate = today.toISOString().split("T")[0];
+
+today.setDate(today.getDate() - 1);
+
+const startDate = today.toISOString().split("T")[0];
+
 
     const response = await searchconsole.searchanalytics.query({
 
@@ -33,10 +41,9 @@ export default async function handler(req, res) {
 
       requestBody: {
 
-        startDate: "2026-07-01",
+        startDate: startDate,
 
-        endDate: "2026-07-20",
-
+endDate: endDate,
         rowLimit: 10
 
       }
@@ -51,7 +58,7 @@ export default async function handler(req, res) {
 
       status: "SEO EZOID aktif",
 
-      period: "2026-07-01 sampai 2026-07-20",
+      period: startDate + " sampai " + endDate,
 
      total: {
 
