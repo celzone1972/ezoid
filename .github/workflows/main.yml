@@ -1,0 +1,15 @@
+name: EZOID SEO Report
+
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+
+jobs:
+  seo-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Call SEO API
+        run: |
+          curl -L https://ezoid.vercel.app/api/seo
