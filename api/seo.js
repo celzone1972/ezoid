@@ -67,6 +67,20 @@ endDate: endDate,
 🏆 Posisi Rata-rata: ${row ? row.position.toFixed(1) : "0"}
 `;
 
+await fetch(
+`https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`,
+{
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+chat_id: process.env.TELEGRAM_CHAT_ID,
+text: report
+})
+}
+);
+    
     res.status(200).json({
 
       status: "SEO EZOID aktif",
