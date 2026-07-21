@@ -37,10 +37,6 @@ export default async function handler(req, res) {
 
         endDate: "2026-07-20",
 
-        dimensions: [
-          "query"
-        ],
-
         rowLimit: 10
 
       }
@@ -48,22 +44,7 @@ export default async function handler(req, res) {
     });
 
 
-    const rows = response.data.rows || [];
-
-
-    const keywords = rows.map(item => ({
-
-      keyword: item.keys[0],
-
-      clicks: item.clicks,
-
-      impressions: item.impressions,
-
-      ctr: (item.ctr * 100).toFixed(2) + "%",
-
-      position: item.position.toFixed(1)
-
-    }));
+    const row = response.data.rows ? response.data.rows[0] : null;
 
 
     res.status(200).json({
@@ -72,19 +53,18 @@ export default async function handler(req, res) {
 
       period: "2026-07-01 sampai 2026-07-20",
 
-      total: {
+     total: {
 
-        clicks: response.data.rows
-          ? rows.reduce((a,b)=>a+b.clicks,0)
-          : 0,
+  clicks: row ? row.clicks : 0,
 
-        impressions: response.data.rows
-          ? rows.reduce((a,b)=>a+b.impressions,0)
-          : 0
+  impressions: row ? row.impressions : 0,
 
-      },
+  ctr: row ? (row.ctr * 100).toFixed(2) + "%" : "0%",
 
-      keywords
+  position: row ? row.position.toFixed(1) : "0"
+
+}
+
 
     });
 
