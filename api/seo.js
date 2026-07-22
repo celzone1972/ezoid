@@ -52,7 +52,23 @@ endDate: endDate,
 
 
     const row = response.data.rows ? response.data.rows[0] : null;
+    const date28 = new Date();
+date28.setDate(date28.getDate() - 28);
 
+const startDate28 = date28.toISOString().split("T")[0];
+
+const response28 = await searchconsole.searchanalytics.query({
+  siteUrl: "https://ezoid.vercel.app/",
+  requestBody: {
+    startDate: startDate28,
+    endDate: endDate,
+    rowLimit: 10
+  }
+});
+
+const row28 = response28.data.rows
+  ? response28.data.rows[0]
+  : null;
     const formatTanggal = (tanggal) => {
   return new Date(tanggal).toLocaleDateString("id-ID", {
     day: "numeric",
@@ -63,17 +79,18 @@ endDate: endDate,
     const report = `
 📊 SEO EZOID REPORT
 
-📅 Periode: ${formatTanggal(startDate)} sampai ${formatTanggal(endDate)}
-
+📅 24 Jam
 👆 Klik: ${row ? row.clicks : 0}
-
 👀 Tayangan: ${row ? row.impressions : 0}
-
 📈 CTR: ${row ? (row.ctr * 100).toFixed(2) + "%" : "0%"}
+🏆 Posisi: ${row ? row.position.toFixed(1) : "0"}
 
-🏆 Posisi Rata-rata: ${row ? row.position.toFixed(1) : "0"}
+📅 28 Hari
+👆 Klik: ${row28 ? row28.clicks : 0}
+👀 Tayangan: ${row28 ? row28.impressions : 0}
+📈 CTR: ${row28 ? (row28.ctr * 100).toFixed(2) + "%" : "0%"}
+🏆 Posisi: ${row28 ? row28.position.toFixed(1) : "0"}
 `;
-
 await fetch(
 `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}/sendMessage`,
 {
