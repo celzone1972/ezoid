@@ -75,8 +75,10 @@ export default async function handler(req, res) {
     sumber = "WhatsApp";
   }
 
-  const judul = req.query.title || "Artikel EZOID";
-  const urlArtikel = req.query.url || "-";
+  const body = req.body || {};
+
+const judul = body.title || req.query.title || "Artikel EZOID";
+const urlArtikel = body.url || req.query.url || "-";
 
   const now = new Date();
 
