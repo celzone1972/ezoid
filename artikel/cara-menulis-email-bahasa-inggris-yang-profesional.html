@@ -183,6 +183,17 @@ Daftar via WhatsApp
 </a>
 </p>
 </div>
-
+<script>
+fetch('/api/article', {
+method:'POST',
+headers:{
+'Content-Type':'application/json'
+},
+body:JSON.stringify({
+title:document.title,
+url:window.location.href
+})
+});
+</script>
 </body>
 </html>
