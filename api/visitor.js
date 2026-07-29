@@ -52,25 +52,53 @@ try {
 
 
   // DEVICE
-  const userAgent = req.headers["user-agent"] || "";
+const userAgent = req.headers["user-agent"] || "";
 
-  let device = "Tidak diketahui";
+let device = "Tidak diketahui";
 
-  if (/android/i.test(userAgent)) {
-    device = "Android Mobile";
-  } 
-  else if (/iphone/i.test(userAgent)) {
-    device = "iPhone";
-  } 
-  else if (/ipad/i.test(userAgent)) {
-    device = "iPad";
-  } 
-  else if (/windows/i.test(userAgent)) {
-    device = "Windows Desktop";
-  } 
-  else if (/macintosh/i.test(userAgent)) {
-    device = "Mac Desktop";
+if (/android/i.test(userAgent)) {
+
+  if (/samsung/i.test(userAgent)) {
+    device = "Android / Samsung";
   }
+
+  else if (/xiaomi|redmi|mi /i.test(userAgent)) {
+    device = "Android / Xiaomi";
+  }
+
+  else if (/realme/i.test(userAgent)) {
+    device = "Android / Realme";
+  }
+
+  else if (/oppo/i.test(userAgent)) {
+    device = "Android / Oppo";
+  }
+
+  else if (/vivo/i.test(userAgent)) {
+    device = "Android / Vivo";
+  }
+
+  else {
+    device = "Android";
+  }
+
+}
+
+else if (/iphone/i.test(userAgent)) {
+  device = "iPhone";
+}
+
+else if (/ipad/i.test(userAgent)) {
+  device = "iPad";
+}
+
+else if (/windows/i.test(userAgent)) {
+  device = "Windows Desktop";
+}
+
+else if (/macintosh/i.test(userAgent)) {
+  device = "Mac Desktop";
+}
 
 
   // SUMBER TRAFFIC
