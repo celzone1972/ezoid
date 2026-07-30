@@ -138,7 +138,6 @@ else if (/macintosh/i.test(userAgent)) {
 📍 Lokasi: ${lokasi}
 
 📱 Device: ${device}
-
 🌐 Sumber: ${sumber}`;
 
 
