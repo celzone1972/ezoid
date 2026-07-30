@@ -53,7 +53,7 @@ try {
 
   // DEVICE
 const userAgent = req.headers["user-agent"] || "";
-console.log("USER AGENT:", userAgent);
+
 let device = "Tidak diketahui";
 
 if (/android/i.test(userAgent)) {
@@ -138,8 +138,6 @@ else if (/macintosh/i.test(userAgent)) {
 📍 Lokasi: ${lokasi}
 
 📱 Device: ${device}
-
-🔎 UA: ${userAgent}
 
 🌐 Sumber: ${sumber}`;
 
