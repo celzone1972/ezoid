@@ -53,7 +53,7 @@ try {
 
   // DEVICE
 const userAgent = req.headers["user-agent"] || "";
-
+console.log("USER AGENT:", userAgent);
 let device = "Tidak diketahui";
 
 if (/android/i.test(userAgent)) {
