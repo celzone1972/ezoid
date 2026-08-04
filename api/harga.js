@@ -4,7 +4,11 @@ export default async function handler(req, res) {
   const chatId = process.env.TELEGRAM_CHAT_ID;
 
 
-  const ip = req.headers["x-forwarded-for"]?.split(",")[0] || "";
+  const ip =
+  req.headers["x-forwarded-for"]?.split(",")[0] ||
+  req.headers["x-real-ip"] ||
+  req.socket?.remoteAddress ||
+  "";
 
 
   let lokasi = "Tidak diketahui";
@@ -12,18 +16,39 @@ export default async function handler(req, res) {
 
   try {
 
-    const geo = await fetch(`https://ipapi.co/${ip}/json/`);
+  const geo = await fetch(`https://ipapi.co/${ip}/json/`);
+  const data = await geo.json();
+
+  if (data.city) {
+    lokasi =
+      `${data.city}, ${data.region}, ${data.country_name}`;
+  }
+
+
+} catch {
+
+
+  try {
+
+    const geo = await fetch(`https://ipwho.is/${ip}`);
     const data = await geo.json();
 
-    lokasi =
-      `${data.city || "-"}, ${data.region || "-"}, ${data.country_name || "-"}`;
+    if (data.city) {
+      lokasi =
+        `${data.city}, ${data.region}, ${data.country}`;
+    }
 
 
   } catch {
 
+
     lokasi = "Tidak diketahui";
 
+
   }
+
+
+}
 
 
 
