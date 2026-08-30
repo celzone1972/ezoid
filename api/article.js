@@ -1,16 +1,6 @@
 ```javascript
 export default async function handler(req, res) {
-
-  // Izinkan GET untuk pengujian langsung dan POST dari halaman artikel.
-  if (req.method !== "GET" && req.method !== "POST") {
-    return res.status(405).json({
-      ok: false,
-      error: "Method tidak diizinkan. Gunakan GET atau POST."
-    });
-  }
-
   try {
-
     const token = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
 
@@ -21,33 +11,9 @@ export default async function handler(req, res) {
       });
     }
 
-    const ip = req.headers["x-forwarded-for"]?.split(",")[0].trim() || "";
-
-    let lokasi = "Tidak diketahui";
-
-    if (ip) {
-      try {
-        const geo1 = await fetch(`https://ipapi.co/${ip}/json/`);
-        const data1 = await geo1.json();
-
-        if (data1.city || data1.region || data1.country_name) {
-          lokasi = `${data1.city || "-"}, ${data1.region || "-"}, ${data1.country_name || "-"}`;
-        } else {
-          throw new Error("ipapi gagal");
-        }
-      } catch (e1) {
-        try {
-          const geo2 = await fetch(`http://ip-api.com/json/${ip}`);
-          const data2 = await geo2.json();
-
-          if (data2.status === "success") {
-            lokasi = `${data2.city || "-"}, ${data2.regionName || "-"}, ${data2.country || "-"}`;
-          }
-        } catch (e2) {}
-      }
-    }
-
-    const userAgent = req.headers["user-agent"] || "";
+    const headers = req.headers || {};
+    const userAgent = headers["user-agent"] || "";
+    const referer = headers["referer"] || "";
 
     // =========================
     // DETEKSI BOT
@@ -80,8 +46,6 @@ export default async function handler(req, res) {
     // SUMBER
     // =========================
 
-    const referer = req.headers["referer"] || "";
-
     let sumber = "Direct";
 
     if (referer.includes("facebook")) {
@@ -112,9 +76,11 @@ export default async function handler(req, res) {
       req.query.title ||
       "Artikel EZOID";
 
+    const query = req.query || {};
+
     const urlArtikel =
       body.url ||
-      req.query.url ||
+      query.url ||
       "https://ezoid.vercel.app/";
 
     // =========================
