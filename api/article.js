@@ -64,6 +64,40 @@ export default async function handler(req, res) {
     referer ||
     "-";
 
+  // Ambil IP pengunjung
+  const forwarded = req.headers["x-forwarded-for"];
+  const ip =
+    (Array.isArray(forwarded)
+      ? forwarded[0]
+      : forwarded?.split(",")[0]) ||
+    req.headers["x-real-ip"] ||
+    "";
+
+  // Deteksi lokasi berdasarkan IP
+  let lokasi = "Tidak diketahui";
+
+  if (ip) {
+    try {
+      const geoResponse = await fetch(
+        `https://ipapi.co/${ip.trim()}/json/`
+      );
+
+      if (geoResponse.ok) {
+        const geo = await geoResponse.json();
+
+        const city = geo.city || "";
+        const region = geo.region || "";
+        const country = geo.country_name || "";
+
+        lokasi = [city, region, country]
+          .filter(Boolean)
+          .join(", ");
+      }
+    } catch (error) {
+      lokasi = "Tidak diketahui";
+    }
+  }
+
   const now = new Date();
 
   const tanggal = now.toLocaleDateString("id-ID", {
@@ -93,7 +127,7 @@ ${urlArtikel}
 📅 Tanggal: ${tanggal}
 ⏰ Jam: ${jam} WIB
 
-📍 Lokasi: Tidak diketahui
+📍 Lokasi: ${lokasi}
 
 📱 Device: ${device}
 🌐 Sumber: ${sumber}`;
