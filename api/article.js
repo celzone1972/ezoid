@@ -63,13 +63,19 @@ ${urlArtikel}
 🌐 Sumber: ${sumber}`;
 
 try {
-const telegramResponse = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-method: "POST",
-headers: { "Content-Type": "application/json" },
-body: JSON.stringify({ chat_id: chatId, text: message })
-});
+const telegramFetch = globalThis.fetch;
 
 ```
+if (typeof telegramFetch !== "function") {
+  return res.status(500).json({ ok: false, error: "fetch tidak tersedia di runtime Vercel." });
+}
+
+const telegramResponse = await telegramFetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ chat_id: chatId, text: message })
+});
+
 const telegramResult = await telegramResponse.json();
 return res.status(telegramResponse.ok ? 200 : 502).json(telegramResult);
 ```
