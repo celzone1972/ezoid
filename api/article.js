@@ -1,3 +1,4 @@
+```javascript
 export default async function handler(req, res) {
 
   const token = process.env.TELEGRAM_BOT_TOKEN;
@@ -43,6 +44,19 @@ export default async function handler(req, res) {
 
   const userAgent = req.headers["user-agent"] || "";
 
+  // =========================
+  // DETEKSI BOT
+  // =========================
+
+  const botPattern =
+    /bot|crawler|spider|slurp|bingpreview|facebookexternalhit|facebot|google-inspectiontool|googlebot|bingbot|yandex|baiduspider|duckduckbot|semrush|ahrefs|mj12bot|dotbot|petalbot|bytespider|applebot|linkedinbot|twitterbot|telegrambot|whatsapp/i;
+
+  const isBot = botPattern.test(userAgent);
+
+  // =========================
+  // DEVICE
+  // =========================
+
   let device = "Tidak diketahui";
 
   if (/android/i.test(userAgent)) {
@@ -61,6 +75,10 @@ export default async function handler(req, res) {
     device = "Mac Desktop";
   }
 
+  // =========================
+  // SUMBER
+  // =========================
+
   const referer = req.headers["referer"] || "";
 
   let sumber = "Direct";
@@ -75,10 +93,25 @@ export default async function handler(req, res) {
     sumber = "WhatsApp";
   }
 
+  // =========================
+  // DATA ARTIKEL
+  // =========================
+
   const body = req.body || {};
 
-const judul = body.title || req.query.title || "Artikel EZOID";
-const urlArtikel = body.url || req.query.url || "-";
+  const judul =
+    body.title ||
+    req.query.title ||
+    "Artikel EZOID";
+
+  const urlArtikel =
+    body.url ||
+    req.query.url ||
+    "-";
+
+  // =========================
+  // WAKTU
+  // =========================
 
   const now = new Date();
 
@@ -92,8 +125,26 @@ const urlArtikel = body.url || req.query.url || "-";
     minute: "2-digit"
   });
 
+  // =========================
+  // STATUS PENGUNJUNG
+  // =========================
+
+  let statusPengunjung;
+
+  if (isBot) {
+    statusPengunjung = "🤖 Pengunjung Bot Membuka Artikel";
+  } else {
+    statusPengunjung = "👤 Pengunjung Manusia Membuka Artikel";
+  }
+
+  // =========================
+  // PESAN TELEGRAM
+  // =========================
+
   const message =
-`📖 Artikel EZOID Dibuka
+`${statusPengunjung}
+
+📖 Artikel EZOID
 
 📌 Judul:
 ${judul}
@@ -108,6 +159,10 @@ ${urlArtikel}
 
 📱 Device: ${device}
 🌐 Sumber: ${sumber}`;
+
+  // =========================
+  // KIRIM TELEGRAM
+  // =========================
 
   const telegramUrl =
     `https://api.telegram.org/bot${token}/sendMessage`;
@@ -128,3 +183,4 @@ ${urlArtikel}
   res.status(200).json(result);
 
 }
+```
