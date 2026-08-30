@@ -16,6 +16,26 @@ export default async function handler(req, res) {
     const referer = headers["referer"] || "";
 
     // =========================
+    // LOKASI
+    // =========================
+
+    const ip = headers["x-forwarded-for"]?.split(",")[0]?.trim() || "";
+    let lokasi = "Tidak diketahui";
+
+    if (ip) {
+      try {
+        const geo = await fetch(`https://ipapi.co/${ip}/json/`);
+        const data = await geo.json();
+
+        if (data.city || data.region || data.country_name) {
+          lokasi = `${data.city || "-"}, ${data.region || "-"}, ${data.country_name || "-"}`;
+        }
+      } catch (e) {
+        lokasi = "Tidak diketahui";
+      }
+    }
+
+    // =========================
     // DETEKSI BOT
     // =========================
 
