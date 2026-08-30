@@ -1,3 +1,5 @@
+import https from "https";
+
 export default async function handler(req, res) {
 const token = process.env.TELEGRAM_BOT_TOKEN;
 const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -63,18 +65,42 @@ ${urlArtikel}
 🌐 Sumber: ${sumber}`;
 
 try {
-const telegramResponse = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-method: "POST",
-headers: { "Content-Type": "application/json" },
-body: JSON.stringify({ chat_id: chatId, text: message })
-});
+const telegramResult = await new Promise((resolve, reject) => {
+const data = JSON.stringify({ chat_id: chatId, text: message });
 
 ```
-const telegramResult = await telegramResponse.json();
-return res.status(telegramResponse.ok ? 200 : 502).json(telegramResult);
+  const request = https.request({
+    hostname: "api.telegram.org",
+    path: `/bot${token}/sendMessage`,
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Content-Length": Buffer.byteLength(data)
+    }
+  }, (response) => {
+    let result = "";
+    response.on("data", chunk => { result += chunk; });
+    response.on("end", () => {
+      try {
+        resolve({ statusCode: response.statusCode, data: JSON.parse(result) });
+      } catch (e) {
+        reject(new Error("Respons Telegram tidak valid."));
+      }
+    });
+  });
+
+  request.on("error", reject);
+  request.write(data);
+  request.end();
+});
+
+return res.status(telegramResult.statusCode >= 200 && telegramResult.statusCode < 300 ? 200 : 502).json(telegramResult.data);
 ```
 
 } catch (error) {
-return res.status(500).json({ ok: false, error: error.message || String(error) });
+return res.status(500).json({
+ok: false,
+error: error && error.message ? error.message : String(error)
+});
 }
 }
