@@ -12,11 +12,18 @@ export default async function handler(req, res) {
   const userAgent = req.headers["user-agent"] || "";
   const referer = req.headers["referer"] || "";
 
-  const isBot =
-    /bot|crawler|spider|slurp|bingpreview|facebookexternalhit|facebot|google-inspectiontool|googlebot|bingbot|yandex|baiduspider|duckduckbot|semrush|ahrefs|mj12bot|dotbot|petalbot|bytespider|applebot|linkedinbot|twitterbot|telegrambot|whatsapp/i.test(
-      userAgent
-    );
+  // Ambil IP visitor
+  const forwarded = req.headers["x-forwarded-for"];
+  const ip = forwarded
+    ? forwarded.split(",")[0].trim()
+    : req.socket?.remoteAddress || "";
 
+  // Deteksi bot / crawler
+  const isBot =
+    /bot|crawler|spider|slurp|bingpreview|facebookexternalhit|facebot|google-inspectiontool|googlebot|bingbot|yandex|baiduspider|duckduckbot|semrush|ahrefs|mj12bot|dotbot|petalbot|bytespider|applebot|linkedinbot|twitterbot|telegrambot|whatsapp/i
+      .test(userAgent);
+
+  // Deteksi device
   let device = "Tidak diketahui";
 
   if (/android/i.test(userAgent)) {
@@ -29,8 +36,11 @@ export default async function handler(req, res) {
     device = "Windows Desktop";
   } else if (/macintosh/i.test(userAgent)) {
     device = "Mac Desktop";
+  } else if (/linux/i.test(userAgent)) {
+    device = "Linux Desktop";
   }
 
+  // Deteksi sumber
   let sumber = "Direct";
 
   if (/facebook/i.test(referer)) {
@@ -39,8 +49,13 @@ export default async function handler(req, res) {
     sumber = "Google";
   } else if (/whatsapp/i.test(referer)) {
     sumber = "WhatsApp";
+  } else if (/bing/i.test(referer)) {
+    sumber = "Bing";
+  } else if (/yahoo/i.test(referer)) {
+    sumber = "Yahoo";
   }
 
+  // Ambil body
   let body = req.body || {};
 
   if (typeof body === "string") {
@@ -64,39 +79,39 @@ export default async function handler(req, res) {
     referer ||
     "-";
 
-  // Ambil IP pengunjung
-  const forwarded = req.headers["x-forwarded-for"];
-  const ip =
-    (Array.isArray(forwarded)
-      ? forwarded[0]
-      : forwarded?.split(",")[0]) ||
-    req.headers["x-real-ip"] ||
-    "";
+  // =========================
+  // LOKASI VISITOR
+  // =========================
 
-  // Deteksi lokasi berdasarkan IP
   let lokasi = "Tidak diketahui";
 
-  if (ip) {
-    try {
+  try {
+    if (ip && ip !== "::1" && ip !== "127.0.0.1") {
       const geoResponse = await fetch(
-        `https://ipapi.co/${ip.trim()}/json/`
+        `https://ipapi.co/${encodeURIComponent(ip)}/json/`
       );
 
       if (geoResponse.ok) {
         const geo = await geoResponse.json();
 
-        const city = geo.city || "";
+        const kota = geo.city || "";
         const region = geo.region || "";
-        const country = geo.country_name || "";
+        const negara = geo.country_name || "";
 
-        lokasi = [city, region, country]
-          .filter(Boolean)
-          .join(", ");
+        const bagian = [kota, region, negara].filter(Boolean);
+
+        if (bagian.length > 0) {
+          lokasi = bagian.join(", ");
+        }
       }
-    } catch (error) {
-      lokasi = "Tidak diketahui";
     }
+  } catch (error) {
+    lokasi = "Tidak diketahui";
   }
+
+  // =========================
+  // TANGGAL & JAM WIB
+  // =========================
 
   const now = new Date();
 
@@ -110,9 +125,17 @@ export default async function handler(req, res) {
     minute: "2-digit"
   });
 
+  // =========================
+  // STATUS
+  // =========================
+
   const status = isBot
     ? "🤖 ARTIKEL EZOID DIBACA BOT"
     : "👤 ARTIKEL EZOID DIBUKA MANUSIA";
+
+  // =========================
+  // PESAN TELEGRAM
+  // =========================
 
   const message = `${status}
 
@@ -156,10 +179,7 @@ ${urlArtikel}
   } catch (error) {
     return res.status(500).json({
       ok: false,
-      error:
-        error && error.message
-          ? error.message
-          : String(error)
+      error: error?.message || String(error)
     });
   }
 }
