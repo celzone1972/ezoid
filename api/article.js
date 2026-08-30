@@ -1,6 +1,14 @@
 ```javascript
 export default async function handler(req, res) {
 
+  // Izinkan GET untuk pengujian langsung dan POST dari halaman artikel.
+  if (req.method !== "GET" && req.method !== "POST") {
+    return res.status(405).json({
+      ok: false,
+      error: "Method tidak diizinkan. Gunakan GET atau POST."
+    });
+  }
+
   try {
 
     const token = process.env.TELEGRAM_BOT_TOKEN;
