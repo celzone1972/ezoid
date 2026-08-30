@@ -1,138 +1,50 @@
-```javascript
 export default async function handler(req, res) {
-  try {
-    const token = process.env.TELEGRAM_BOT_TOKEN;
-    const chatId = process.env.TELEGRAM_CHAT_ID;
+const token = process.env.TELEGRAM_BOT_TOKEN;
+const chatId = process.env.TELEGRAM_CHAT_ID;
 
-    if (!token || !chatId) {
-      return res.status(500).json({
-        ok: false,
-        error: "TELEGRAM_BOT_TOKEN atau TELEGRAM_CHAT_ID belum tersedia di Environment Variables."
-      });
-    }
+if (!token || !chatId) {
+return res.status(500).json({ ok: false, error: "Telegram environment variables tidak tersedia." });
+}
 
-    const headers = req.headers || {};
-    const userAgent = headers["user-agent"] || "";
-    const referer = headers["referer"] || "";
+const userAgent = req.headers["user-agent"] || "";
+const referer = req.headers["referer"] || "";
+const botPattern = /bot|crawler|spider|slurp|bingpreview|facebookexternalhit|facebot|google-inspectiontool|googlebot|bingbot|yandex|baiduspider|duckduckbot|semrush|ahrefs|mj12bot|dotbot|petalbot|bytespider|applebot|linkedinbot|twitterbot|telegrambot|whatsapp/i;
+const isBot = botPattern.test(userAgent);
 
-    // =========================
-    // LOKASI
-    // =========================
+let device = "Tidak diketahui";
+if (/android/i.test(userAgent)) device = "Android Mobile";
+else if (/iphone/i.test(userAgent)) device = "iPhone";
+else if (/ipad/i.test(userAgent)) device = "iPad";
+else if (/windows/i.test(userAgent)) device = "Windows Desktop";
+else if (/macintosh/i.test(userAgent)) device = "Mac Desktop";
 
-    const ip = headers["x-forwarded-for"]?.split(",")[0]?.trim() || "";
-    let lokasi = "Tidak diketahui";
+let sumber = "Direct";
+if (/facebook/i.test(referer)) sumber = "Facebook";
+else if (/google/i.test(referer)) sumber = "Google";
+else if (/whatsapp/i.test(referer)) sumber = "WhatsApp";
 
-    if (ip) {
-      try {
-        const geo = await fetch(`https://ipapi.co/${ip}/json/`);
-        const data = await geo.json();
+let body = req.body || {};
+if (typeof body === "string") {
+try { body = JSON.parse(body); } catch { body = {}; }
+}
 
-        if (data.city || data.region || data.country_name) {
-          lokasi = `${data.city || "-"}, ${data.region || "-"}, ${data.country_name || "-"}`;
-        }
-      } catch (e) {
-        lokasi = "Tidak diketahui";
-      }
-    }
+const query = req.query || {};
+const judul = body.title || query.title || "Artikel EZOID";
+const urlArtikel = body.url || query.url || "-";
 
-    // =========================
-    // DETEKSI BOT
-    // =========================
+const now = new Date();
+const tanggal = now.toLocaleDateString("id-ID", { timeZone: "Asia/Jakarta" });
+const jam = now.toLocaleTimeString("id-ID", {
+timeZone: "Asia/Jakarta",
+hour: "2-digit",
+minute: "2-digit"
+});
 
-    const botPattern =
-      /bot|crawler|spider|slurp|bingpreview|facebookexternalhit|facebot|google-inspectiontool|googlebot|bingbot|yandex|baiduspider|duckduckbot|semrush|ahrefs|mj12bot|dotbot|petalbot|bytespider|applebot|linkedinbot|twitterbot|telegrambot|whatsapp/i;
+const status = isBot
+? "🤖 Pengunjung Bot Membuka Artikel"
+: "👤 Pengunjung Manusia Membuka Artikel";
 
-    const isBot = botPattern.test(userAgent);
-
-    // =========================
-    // DEVICE
-    // =========================
-
-    let device = "Tidak diketahui";
-
-    if (/android/i.test(userAgent)) {
-      device = "Android Mobile";
-    } else if (/iphone/i.test(userAgent)) {
-      device = "iPhone";
-    } else if (/ipad/i.test(userAgent)) {
-      device = "iPad";
-    } else if (/windows/i.test(userAgent)) {
-      device = "Windows Desktop";
-    } else if (/macintosh/i.test(userAgent)) {
-      device = "Mac Desktop";
-    }
-
-    // =========================
-    // SUMBER
-    // =========================
-
-    let sumber = "Direct";
-
-    if (referer.includes("facebook")) {
-      sumber = "Facebook";
-    } else if (referer.includes("google")) {
-      sumber = "Google";
-    } else if (referer.includes("whatsapp")) {
-      sumber = "WhatsApp";
-    }
-
-    // =========================
-    // DATA ARTIKEL
-    // POST dari HTML atau GET untuk tes langsung
-    // =========================
-
-    let body = req.body || {};
-
-    if (typeof body === "string") {
-      try {
-        body = JSON.parse(body);
-      } catch (e) {
-        body = {};
-      }
-    }
-
-    const judul =
-      body.title ||
-      req.query.title ||
-      "Artikel EZOID";
-
-    const query = req.query || {};
-
-    const urlArtikel =
-      body.url ||
-      query.url ||
-      "https://ezoid.vercel.app/";
-
-    // =========================
-    // WAKTU
-    // =========================
-
-    const now = new Date();
-
-    const tanggal = now.toLocaleDateString("id-ID", {
-      timeZone: "Asia/Jakarta"
-    });
-
-    const jam = now.toLocaleTimeString("id-ID", {
-      timeZone: "Asia/Jakarta",
-      hour: "2-digit",
-      minute: "2-digit"
-    });
-
-    // =========================
-    // STATUS PENGUNJUNG
-    // =========================
-
-    const statusPengunjung = isBot
-      ? "🤖 Pengunjung Bot Membuka Artikel"
-      : "👤 Pengunjung Manusia Membuka Artikel";
-
-    // =========================
-    // PESAN TELEGRAM
-    // =========================
-
-    const message =
-`${statusPengunjung}
+const message = `${status}
 
 📖 Artikel EZOID
 
@@ -145,48 +57,24 @@ ${urlArtikel}
 📅 Tanggal: ${tanggal}
 ⏰ Jam: ${jam} WIB
 
-📍 Lokasi: ${lokasi}
+📍 Lokasi: Tidak diketahui
 
 📱 Device: ${device}
 🌐 Sumber: ${sumber}`;
 
-    // =========================
-    // KIRIM TELEGRAM
-    // =========================
+try {
+const response = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({ chat_id: chatId, text: message })
+});
 
-    const telegramUrl =
-      `https://api.telegram.org/bot${token}/sendMessage`;
-
-    const response = await fetch(telegramUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: message
-      })
-    });
-
-    const result = await response.json();
-
-    if (!response.ok) {
-      return res.status(500).json({
-        ok: false,
-        telegram: result
-      });
-    }
-
-    return res.status(200).json(result);
-
-  } catch (error) {
-
-    return res.status(500).json({
-      ok: false,
-      error: error.message || "Terjadi kesalahan pada API artikel."
-    });
-
-  }
-
-}
 ```
+const result = await response.json();
+return res.status(response.ok ? 200 : 502).json(result);
+```
+
+} catch (error) {
+return res.status(500).json({ ok: false, error: error.message });
+}
+}
