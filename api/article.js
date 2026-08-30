@@ -1,11 +1,9 @@
 export default async function handler(req, res) {
-try {
 const token = process.env.TELEGRAM_BOT_TOKEN;
 const chatId = process.env.TELEGRAM_CHAT_ID;
 
-```
 if (!token || !chatId) {
-  return res.status(500).json({ ok: false, error: "Telegram environment variables tidak tersedia." });
+return res.status(500).json({ ok: false, error: "Telegram environment variables tidak tersedia." });
 }
 
 const userAgent = req.headers["user-agent"] || "";
@@ -27,7 +25,7 @@ else if (/whatsapp/i.test(referer)) sumber = "WhatsApp";
 
 let body = req.body || {};
 if (typeof body === "string") {
-  try { body = JSON.parse(body); } catch { body = {}; }
+try { body = JSON.parse(body); } catch (e) { body = {}; }
 }
 
 const query = req.query || {};
@@ -37,17 +35,16 @@ const urlArtikel = body.url || query.url || referer || "-";
 const now = new Date();
 const tanggal = now.toLocaleDateString("id-ID", { timeZone: "Asia/Jakarta" });
 const jam = now.toLocaleTimeString("id-ID", {
-  timeZone: "Asia/Jakarta",
-  hour: "2-digit",
-  minute: "2-digit"
+timeZone: "Asia/Jakarta",
+hour: "2-digit",
+minute: "2-digit"
 });
 
 const status = isBot
-  ? "🤖 Pengunjung Bot Membuka Artikel"
-  : "👤 Pengunjung Manusia Membuka Artikel";
+? "🤖 Pengunjung Bot Membuka Artikel"
+: "👤 Pengunjung Manusia Membuka Artikel";
 
 const message = `${status}
-```
 
 📖 Artikel EZOID
 
@@ -65,21 +62,19 @@ ${urlArtikel}
 📱 Device: ${device}
 🌐 Sumber: ${sumber}`;
 
-```
+try {
 const telegramResponse = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ chat_id: chatId, text: message })
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify({ chat_id: chatId, text: message })
 });
 
+```
 const telegramResult = await telegramResponse.json();
 return res.status(telegramResponse.ok ? 200 : 502).json(telegramResult);
 ```
 
 } catch (error) {
-return res.status(500).json({
-ok: false,
-error: error && error.message ? error.message : String(error)
-});
+return res.status(500).json({ ok: false, error: error.message || String(error) });
 }
 }
